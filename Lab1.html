@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Resume - Start Bootstrap Theme</title>
+        <title>ECE 4160: Lab 1</title>
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -30,26 +30,90 @@
                 </ul>
             </div>
         </nav>
-        <!-- Page Content-->
-        <div class="container-fluid p-0">
-            <!-- About-->
-            <section class="resume-section" id="about">
-                <div class="resume-section-content">
-                    <h1 class="mb-0">
-                        Eshita
-                        <span class="text-primary">Sangani</span>
-                    </h1>
-                    <p class="lead mb-5"> Hi! I'm Eshita Sangani, a undergrad at Cornell majoring in ECE and CS. This is my documentation for the labs ECE 4160: Fast Robots</p>
-                    <!-- <div class="social-icons">
-                        <a class="social-icon" href="#!"><i class="fab fa-linkedin-in"></i></a>
-                    </div> -->
+    <!-- Page Content-->
+    <section class="resume-section" id="experience">
+        <div class="resume-section-content">
+            <h2 class="mb-2">Lab 1 <span class="text-primary">Artemis</span></h2>
+            <p class="mb-5">The purpose of this lab was to become more accustomed with the Artemis board that 
+                will be used throughout the rest of the class. We explored the onboard funcions such as the 
+                microphone, LED, and temperature sensor as well as the serial communication by connecting 
+                the board to our computer. Since an Arduino IDE was used with this board, some of the examples 
+                that are available with the IDE were incorporated.</p>
+                <!-- <p class="mb-5">For more inf</p> -->
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">Blink Example</h3>
+                    <iframe width="560" height="315" src="https://www.youtube.com/shorts/c5F14zjHgsE"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                    <p>This Arduino example blinks the LED on and off, as seen in the video below. 
+                    </p>
                 </div>
-            </section>
-            <hr class="m-0" />
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">Serial Example</h3>
+                    <iframe width="560" height="315" src="https://youtu.be/kst3-fK62RA"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                    <p>The next Arduiono example is Serial. This was used to test the UART communication between the board and the computer. The Artemis Nano board
+                        that we are using as two UART ports, and one was used via USB-C. However, in order to get the messages in a readable format, the baud rate needed to be 
+                        the same in the sample code and the serial monitor. In this particular example, 115200 was used. This is seen in the video below - where hello is types in the monitor, 
+                        and then displayed below. 
+                    </p>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">Analog Read Example</h3>
+                    <iframe width="560" height="315" src="https://www.youtube.com/watch?v=UYmHQgUnjg4"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                    <p> In this example. 
+                        The Artemis Nano has an onboard analog to digital converter (ADC) which converts voltage to a digital signal 
+                        that can be read by the microcontroller. We want to see the values measured from the ADC pin on the 
+                        temperature sensor to utilize the AnalogRead() function. 
+
+                        <img src="output.jpg" alt="Serial Monitor Output">
+
+                        In the first image, we can see the different outputs from the example code.  The analog voltage on the specific pin 
+                        - external (counts), the source voltage across a voltage divider - vcc/3, the ground voltage - vss(counts), and the time are 
+                        the outputs that are not relevant to this specific task. 
+
+                        In the video below, we can see the temp (counts) output steadily increase from 33000 to 33500 via the serial 
+                        monitor. This was a slight increase because I was applying pressure from my hand on the temperature sensor 
+                        that is on the board. 
+                    
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">Microphone Output Example</h3>
+                    <iframe width="560" height="315" src="https://youtu.be/IatFiVjvOJ0"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                    <p> The Artemis Nano also has an microphone that outputs the frequency of the audio via the serial monitor. It is built
+                        with the PDM (pulse-density modulation) library which converts an analog signal to a single bit signal and FFT library to 
+                        calculate the appropiate frequency. In the video below, I am speaking into the microphone and the frequency changes
+                        according to my voice. 
+                    </p>
+                </div>
+            </div>
         </div>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+    </section>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+</body>
+
 </html>
