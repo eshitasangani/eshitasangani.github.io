@@ -49,19 +49,34 @@
                 For the Artemis side of the communication, the Arduino IDE was used and for the computer side, Python was used through Jupyter Lab. 
                 The main task in this lab was to understand how to send, receive, and interpret commands and data. 
             </p>
-                <!-- <p class="mb-5">For more inf</p> -->
-
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0">BLE Overview</h3>
                     <p> 
-                    
+                        The BLE (Bluetooth Low Energy) library is a more energy efficient and optimized version of Bluetooth and is used in situations 
+                        that don't need to exchange/send large amounts of data. It exists within arduino and already contains the necessary hardware 
+                        support. 
                     </p>
                     <h4 class="mb-0">Artemis Side </h3>
                     <p> 
+                        The ArduinoBLE library was installed within the IDE and its main file, ble_arduino.ino example was the base of this lab. 
+                        When running the sketch, the Artemis' MAC address was printed to the serial monitor. 
 
                     </p>
                     <h4 class="mb-0">Computer Side</h3>
+                        <p> 
+
+                            Python was the main language that was used along with its packages such as numpy, pyyaml, colorama,
+                            nest_asyncio, and bleak. A virtual environment was also used to ensure that there were no dependency 
+                            errors and each student's machine had the appropiate packages and libraries. In this case, 
+                            the FastRobots_ble environment was used. These were installed using these 
+                            commands: 
+                            
+                            <script src="https://gist.github.com/eshitasangani/b4b75dd92bd24703474d891b3ace8ce4.js"></script>
+
+                        </p>
+                    
+                    <h4 class="mb-0">Communication between Artemis and Computer</h3>
                         <p> 
                         </p>
                 </div>
