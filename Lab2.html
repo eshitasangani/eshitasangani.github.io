@@ -85,16 +85,23 @@
                             <p>
                                 On the computer side: 
                             </p>
+                            <p> 
                             <img src="assets/computer_connection.jpg" alt="..." width="90%" />
+                            </p>
                             <p>
                                 On the Artemis side: 
                             </p>
-                            <img src="assets/artemis.jpg" alt="..." width="100%" />
+                            <p>
+                                <img src="assets/artemis.jpg" alt="..." width="100%" /> 
+                            </p>
+                            
                         <p>
                             Here are a few examples of sending + receiving commands. 
                             This is how the commands are sent on the computer side: 
                         </p>
+                        <p>
                             <img src="assets/comp_send.jpg" alt="..." width="90%" />
+                        </p>
                             <p>
                                 This is how they were received on the artemis side. 
                             </p>
@@ -117,20 +124,22 @@
                     If the echo command with the text " Hi Hello" is sent as seen below, we can see that when 
                     we ask to receive the command, the same text is sent back, with the addition of "Robot says."
                     </p> 
-                    <img src="assets/echocomputer.jpg" alt="..." width="85%" />
+                    <img src="assets/echocomputer.jpg" alt="..." width="55%" />
                 </div>
             </div>
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0">GET_TIME_MILLIS Command</h3>
-                 
                     <p> Similarily to the echo command. I updated the necessary files to add the GET_TIME_MILLIS command.
                         This command would send the time in milliseconds back to the computer when the command is received.
                         
                     </p>
                     <p> 
-                        <img src="assets/echocomputer.jpg" alt="..." width="85%" />
+                        When the command is called from the python side, this is what is received: 
+                    </p>
+                    <p> 
+                        <img src="assets/gettimemillis_com.jpg" alt="..." width="45%" />
                     </p>
                     
                 </div>
@@ -140,7 +149,19 @@
                 <div class="flex-grow-1">
                     <h3 class="mb-0">GET_TEMP_5s Command</h3>
                    
-                    <p> --
+                    <p> 
+                        The GET_TEMP_5s command will use the onboard temperature sensor to send 
+                        a time stamped temperature reading back to the computer which is taken once 
+                        every second for five consecutive seconds. 
+                    </p>
+                    <p> 
+                        When implementing this command, a notification handler was also incorporated 
+                        to ensure that the value that was being received was the most updated reading. 
+                        The implementation of the temperature sensor will be discussed in the following
+                        section. 
+                    </p>
+                    <p> 
+                        <img src="assets/get5s.jpg" alt="..." width="45%" />
                     </p>
                 </div>
             </div>
