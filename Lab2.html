@@ -72,68 +72,71 @@
                             the FastRobots_ble environment was used. These were installed using these 
                             commands: 
                             <script src="https://gist.github.com/eshitasangani/b4b75dd92bd24703474d891b3ace8ce4.js"></script>
-
                         </p>
                     
                     <h4 class="mb-0">Communication between Artemis and Computer</h3>
                         <p> 
+                            Checking that the MAC address printed on the Artemis and computer side was the same is how 
+                            the bluetooh connectivity was verified. Within the codebase, a demo.ipynb file setup the bluetooth 
+                            connection. To define the addresses, UUIDS (Universally Unique Identifiers) was used which helps 
+                            differentiate between the types of data being sent. A new UUID was created and inserted in the appropiate 
+                            connections file. The MAC address of the artemis was added to the connections file as well. The result of 
+                            this communiction is below: 
+                            <img src="assets/computer_connection.jpg" alt="..." width="100%" />
+                            <img src="assets/artemis.jpg" alt="..." width="100%" />
+                            Here are a few examples of sending + receiving commands. 
+                            <img src="assets/commands.jpg" alt="..." width="100%" />
+
+                        
                         </p>
                 </div>
             </div>
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">Serial Example</h3>
-                    <iframe width="560" height="315" src="https://youtube.com/embed/kst3-fK62RA"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
-                    <p>The next Arduiono example is Serial. This was used to test the UART communication between the board and the computer. The Artemis Nano board
-                        that we are using as two UART ports, and one was used via USB-C. However, in order to get the messages in a readable format, the baud rate needed to be 
-                        the same in the sample code and the serial monitor. In this particular example, 115200 was used. This is seen in the video below - where hello is types in the monitor, 
-                        and then displayed above. 
+                    <h3 class="mb-0">ECHO Command</h3>
+                
+                    <p>The 
                     </p>
                 </div>
             </div>
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">Analog Read Example</h3>
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/UYmHQgUnjg4"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
-                    <p> In this example. 
-                        The Artemis Nano has an onboard analog to digital converter (ADC) which converts voltage to a digital signal 
-                        that can be read by the microcontroller. We want to see the values measured from the ADC pin on the 
-                        temperature sensor to utilize the AnalogRead() function. 
-
-                        <!-- <img src="output.jpg" alt="Serial Monitor Output"> -->
-                        In the first image, we can see the different outputs from the example code.  The analog voltage on the specific pin 
-                        - external (counts), the source voltage across a voltage divider - vcc/3, the ground voltage - vss(counts), and the time are 
-                        the outputs that are not relevant to this specific task. 
-
-                        In the video above, we can see the temp (counts) output steadily increase from 33000 to 33500 via the serial 
-                        monitor. This was a slight increase because I was applying pressure from my hand on the temperature sensor 
-                        that is on the board. 
+                    <h3 class="mb-0">GET_TIME_MILLIS Command</h3>
+                 
+                    <p> In 
                     
                 </div>
             </div>
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">Microphone Output Example</h3>
-                    <iframe width="560" height="315" src="https://youtube.com/embed/IatFiVjvOJ0"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
-                    <p> The Artemis Nano also has an microphone that outputs the frequency of the audio via the serial monitor. It is built
-                        with the PDM (pulse-density modulation) library which converts an analog signal to a single bit signal and FFT library to 
-                        calculate the appropiate frequency. In the video above, I am speaking into the microphone and the frequency changes
-                        according to my voice. 
+                    <h3 class="mb-0">GET_TEMP_5s Command</h3>
+                   
+                    <p> --
                     </p>
                 </div>
             </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">Notification Handler</h3>
+                   
+                    <p> --
+                    </p>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">GET_TEMP_5s_RAPID Command</h3>
+                 
+                    <p> In 
+                    
+                </div>
+            </div>
+
         </div>
     </section>
 
