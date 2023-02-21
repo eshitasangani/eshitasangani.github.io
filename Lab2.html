@@ -157,7 +157,7 @@
                     <p> 
                         When implementing this command, a notification handler was also incorporated 
                         to ensure that the value that was being received was the most updated reading. 
-                        The implementation of the temperature sensor will be discussed in the following
+                        The implementation of the notification handler will be discussed in the following
                         sections. 
                     </p>
                     <p> 
@@ -168,12 +168,16 @@
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">GET_TEMP_5s_RAPID Command</h3>
+                    <h3 class="mb-0"> GET_TEMP_5s_RAPID Command </h3>
                  
                     <p> 
                         The GET_TEMP_5s_RAPID command will also use the onboard temperature sensor 
                         to send an array of rapdily sampled temperature readings. It usually sends 300-350 
                         points. The notification handler was used for this command as well.  
+                    </p>
+
+                    <p> 
+                        <img src="assets/rapid.jpg" alt="..." width="55%" />
                     </p>
                     
                 </div>
@@ -201,9 +205,6 @@
                         variable. Then the stop_notify() function is ran after you want to stop checking for 
                         new values being received. 
                     </p>
-                    <p> 
-                        Add more here
-                    </p> 
                 </div>
             </div>
 
