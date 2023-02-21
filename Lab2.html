@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>ECE 4160: Lab 1</title>
+        <title>ECE 4160: Lab 2</title>
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -205,6 +205,26 @@
                         variable. Then the stop_notify() function is ran after you want to stop checking for 
                         new values being received. 
                     </p>
+                </div>
+            </div>
+
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0"> Limitations </h3>
+                 
+                    <p> 
+                        When sending this data, we have been working with strings which introduces
+                        limitations with real-time communication. The Artemis board has 384 kB of RAM,
+                        meaning that we have 384,000 bytes of memory. In our case, 
+                        we could be transmitting 2-byte or 16-bit values at a 150 Hz frequency. 
+                        This means that per second, 300 bytes are being sent (150 * 2 bits). 
+                        For relevance of our commands, this means that in 5 seconds we are using 
+                        (5*300) = 1500 bytes. Given the total RAM of 384kb, if we divde 384000/1500, we get 
+                        256. This means that we can transmit 256 5-second intervals of data based on 
+                        the current Artemis board that we are using.
+                    </p>
+                    
                 </div>
             </div>
 

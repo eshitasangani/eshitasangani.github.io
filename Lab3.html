@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>ECE 4160: Lab 1</title>
+        <title>ECE 4160: Lab 3</title>
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -56,61 +56,90 @@
                     <h3 class="mb-0">I2C Setup</h3>
                     
                     <p>
-                        Since we will be using 2 TOF sensors, we have to 
+                        Since we will be using 2 TOF sensors, we have to make sure that we are 
+                        able to properly process and distinguish the data received from each TOF. 
+                        The address of one of the sensors is already hardwired on the Artemis, so 
+                        we must come up with a way to distinguish the two sensors being used. 
+                        We can either change the address on the software interface or make use 
+                        of the XSHUT pin on the sensor. The XSHUT pin will hold all sensors connected
+                        except for the one that you can then reconfigure. The default I2C address 
+                        is 0x29, as seen in the image below. I chose to enable the sensors separately
+                        through their shutdown pins because you would not need to change 
+                        the address of the sensors every time they power off. In addition, it is more 
+                        power and energy efficient but also comes at the cost of communication delays.
+                        I didn't use the other method because I did not want to have to change the I2C
+                        address every time the sensor is powered off, even though it would give the benefit
+                        of less communication delays. I decided to solder the XSHUT pin of one sensor 
+                        to pin 8 of my Artemis board, which I then used to shut off the corresponding 
+                        sensor during setup and change the address of the other sensor. 
                     </p>
-                </div>
-            </div>
 
-            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">Serial Example</h3>
-                   
-                    <p>The next Arduiono example is Serial. This was used to test the UART communication between the board and the computer. The Artemis Nano board
-                        that we are using as two UART ports, and one was used via USB-C. However, in order to get the messages in a readable format, the baud rate needed to be 
-                        the same in the sample code and the serial monitor. In this particular example, 115200 was used. This is seen in the video below - where hello is types in the monitor, 
-                        and then displayed above. 
+                    <p> 
+                        <img src="assets/gettimemillis_com.jpg" alt="..." width="55%" />
                     </p>
-                </div>
-            </div>
-
-            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">Analog Read Example</h3>
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/UYmHQgUnjg4"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
-                    <p> In this example. 
-                        The Artemis Nano has an onboard analog to digital converter (ADC) which converts voltage to a digital signal 
-                        that can be read by the microcontroller. We want to see the values measured from the ADC pin on the 
-                        temperature sensor to utilize the AnalogRead() function. 
-
-                        <!-- <img src="output.jpg" alt="Serial Monitor Output"> -->
-                        In the first image, we can see the different outputs from the example code.  The analog voltage on the specific pin 
-                        - external (counts), the source voltage across a voltage divider - vcc/3, the ground voltage - vss(counts), and the time are 
-                        the outputs that are not relevant to this specific task. 
-
-                        In the video above, we can see the temp (counts) output steadily increase from 33000 to 33500 via the serial 
-                        monitor. This was a slight increase because I was applying pressure from my hand on the temperature sensor 
-                        that is on the board. 
                     
+                    <p> 
+                        I chose to place both sensors at the front of my robot. I want to measure 
+                        both distances to be able to develop an accurate frame of reference from 
+                        the front. As they will be placed next to each other, the robot will kind of 
+                        have "eyes" or a full point of view and also can account for blind spots 
+                        in the front. The robot could possibly miss situations on the far sides on 
+                        both sides if it does not fall in the field of view. 
+                    </p>
+
                 </div>
             </div>
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">Microphone Output Example</h3>
-                    <iframe width="560" height="315" src="https://youtube.com/embed/IatFiVjvOJ0"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
-                    <p> The Artemis Nano also has an microphone that outputs the frequency of the audio via the serial monitor. It is built
-                        with the PDM (pulse-density modulation) library which converts an analog signal to a single bit signal and FFT library to 
-                        calculate the appropiate frequency. In the video above, I am speaking into the microphone and the frequency changes
-                        according to my voice. 
+                    <h3 class="mb-0">TOF Connections</h3>
+                   
+                    <p>
+
                     </p>
                 </div>
             </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">TOF 1 Readings</h3>
+                   
+                    <p>
+
+                    </p>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">TOF Modes</h3>
+                   
+                    <p>
+
+                    </p>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">2 TOF Sensors</h3>
+                   
+                    <p>
+
+                    </p>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">TOF + Bluetooth</h3>
+                   
+                    <p>
+
+                    </p>
+                </div>
+            </div>
+
         </div>
     </section>
 
