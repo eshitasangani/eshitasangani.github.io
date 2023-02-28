@@ -71,11 +71,12 @@
                         address every time the sensor is powered off, even though it would give the benefit
                         of less communication delays. I decided to solder the XSHUT pin of one sensor 
                         to pin 8 of my Artemis board, which I then used to shut off the corresponding 
-                        sensor during setup and change the address of the other sensor. 
+                        sensor during setup and change the address of the other sensor. In the image below,
+                        the address printed is 0x29. 
                     </p>
 
                     <p> 
-                        <img src="assets/gettimemillis_com.jpg" alt="..." width="55%" />
+                        <img src="assets/port.jpg" alt="..." width="55%" />
                     </p>
                     
                     <p> 
@@ -95,6 +96,7 @@
                     <h3 class="mb-0">TOF Connections</h3>
                    
                     <p>
+                        The 
 
                     </p>
                 </div>
@@ -115,7 +117,29 @@
                     <h3 class="mb-0">TOF Modes</h3>
                    
                     <p>
+                        The TOF sensor has 3 modes that can be used - short, medium, and long. 
+                        Long distance mode allows for the longest range - 4m but is very 
+                        sensitive to ambient light. Short distance mode is not as sensitive 
+                        to ambient light, but has a max ranging distance of 1.3m. 
+                        I chose to use short distance mode because of its resistance against 
+                        ambient light as it will lessen the overall error as it 
+                        can operate in a bright area but at the cost of the range distance. 
 
+                    </p>
+                    <p>
+                        After deciding which mode to use, I used the ReadDistance example 
+                        from the Soarkfun library on one of the TOF sensors to understand 
+                        how the short mode would use. I took the measurements in 4 cm 
+                        increments from 0 cm to 150 cm. The standard deviation of the data 
+                        is miniscule, confirming the repeatability of the short distance mode.
+                        Using the stopRanging() function, I was able to see that 
+                        the ranging time is 97ms with .stopRanging() and 95ms without 
+                        the .stopRanging() function.
+
+                    </p>
+
+                    <p> 
+                        <img src="assets/port.jpg" alt="..." width="55%" />
                     </p>
                 </div>
             </div>
@@ -125,6 +149,19 @@
                     <h3 class="mb-0">2 TOF Sensors</h3>
                    
                     <p>
+                        When hooking up both TOF sensors, I had to 
+                        I set up the initialization of both TOF sensors first, shut down one 
+                        of the sensors, and change the address of the other sensor. Then the first
+                        sensor is turned bck on. 
+                        My loop executes __ fast, and the current limiting factor is 
+                        the ranging time. 
+                        One issue that I had faced was the speed of the readings, it would 
+                        sometimes get stuck and not continue to display the measurements. 
+                        I used .startRanging() instead of .stopRanging() to only iitialize 
+                        the sensors once and also used .checkForDataReady() to only print
+                        the appropiate distance reading if there is a new reading available. 
+                        This is similar to the implementation of the notification handler
+                        in the previous lab. 
 
                     </p>
                 </div>
@@ -135,6 +172,13 @@
                     <h3 class="mb-0">TOF + Bluetooth</h3>
                    
                     <p>
+                        Combining the TOF sensor data with the bluetooh functionality from the 
+                        previous lab, I slightly altered the temperature command to 
+                        instead be able to send TOF sensor data from the Artemis to the computer. 
+                        To add a new command, the arduino sketch, the cmd_types file, as well as the demo.ipynb file needed 
+                        to be updated. The new command is able to collect data from both 
+                        sensors for a specified amount of time and then the computer receives 
+                        the reading from both sensors. 
 
                     </p>
                 </div>
