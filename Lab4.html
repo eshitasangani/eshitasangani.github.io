@@ -65,7 +65,7 @@
                     </p>
 
                     <p> 
-                        <img src="assets/port.jpg" alt="..." width="55%" />
+                        <img src="assets/qwicc.jpg" alt="..." width="55%" />
                     </p>
                        
                     <p>
@@ -88,10 +88,6 @@
                         about the axes), also does not feel the effect of gravity,
                         and is very sensitive to little movements. 
      
-                    </p>
-
-                    <p> 
-                        <img src="assets/port.jpg" alt="..." width="55%" />
                     </p>
 
                     <p> 
@@ -122,9 +118,10 @@
                         Pitch: θ = atan2(x_accel , z_accel)
                         Roll: 𝜙 = atan2(y_accel, z_accel)
                     </p>
-                    <p> 
-                        <img src="assets/port.jpg" alt="..." width="55%" />
-                    </p>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/rymEHaL91Ek"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
 
                     <p>
                         I then visualized the output at -90, 0, and 90 degrees for pitch and roll. 
@@ -151,8 +148,29 @@
                             However, the accelerometer is very noisy, especailly if the RC car is running, because of the noise 
                             from the motors. I ran an FFT on that data - resulting in not too much noise. This led me to use 
                             a low pas filter to make the accelerometer more sensitive to that noise when it is on the car. 
-                            The FFT analysis is shown below. Through this, the frequency found was under .1 Hz, illustrating 
-                            that the noise was reduced. 
+                            The FFT analysis is shown below. Transforming the data from time domain to frequency domain helped show the 
+                            that the frequency with the most noise was around 0.1 Hz, showing the effect of the low pass filter.
+                            Through this, the frequency found was under .1 Hz, illustrating that the noise was reduced. 
+                        </p>
+                        <p> 
+                            The first two images are the time and frequency domain of pitch. 
+                        </p>
+                        <p> 
+                            <img src="assets/timedomain.jpg" alt="..." width="55%" />
+                        </p>
+                        <p> 
+                            <img src="assets/freq.jpg" alt="..." width="55%" />
+                        </p>
+
+                        <p> 
+                            The second two images are the time and frequency domain of roll. 
+                        </p>
+
+                        <p> 
+                            <img src="assets/timeroll.jpg" alt="..." width="55%" />
+                        </p>
+                        <p> 
+                            <img src="assets/freqroll.jpg" alt="..." width="55%" />
                         </p>
 
                 </div>
@@ -160,40 +178,46 @@
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">TOF 1 Readings</h3>
+                    <h3 class="mb-0">GYROSCOPE</h3>
                    
                     <p>
-
+                        In addition to using the accelerometer, I used a gyroscope to 
+                        measure the angular rate. I was able to calculate yaw - the 
+                        rotation around a vertical axis - in addition to pitch and roll.
+                        I calculated these measures using these equations: 
+                    </p>
+                    <p>
+                        pitch_g = pitch_g + myICM.gyrX()*dt;
+                        roll_g = roll_g + myICM.gyrY()*dt;
+                        yaw_g = yaw_g + myICM.gyrZ()*dt;
                     </p>
                 </div>
             </div>
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">TOF Modes</h3>
+                    <h3 class="mb-0">Complementary Filter</h3>
                    
                     <p>
-                        The TOF sensor has 3 modes that can be used - short, medium, and long. 
-                        Long distance mode allows for the longest range - 4m but is very 
-                        sensitive to ambient light. Short distance mode is not as sensitive 
-                        to ambient light, but has a max ranging distance of 1.3m. 
-                        I chose to use short distance mode because of its resistance against 
-                        ambient light as it will lessen the overall error as it 
-                        can operate in a bright area but at the cost of the range distance. 
+                        When using the gyroscope, there is an accumulation of error over time while 
+                        the accelerometer is more susceptible to noise. 
+                        In order to combine the benefits of both the accelerometer 
+                        and gyroscope, I implemented a complementary filter using 
+                        the below equations:
 
                     </p>
+                    
                     <p>
-                        After deciding which mode to use, I used the ReadDistance example 
-                        from the Soarkfun library on one of the TOF sensors to understand 
-                        how the short mode would use. I took the measurements in 4 cm 
-                        increments from 0 cm to 150 cm. The standard deviation of the data 
-                        is miniscule, confirming the repeatability of the short distance mode.
-                        Using the stopRanging() function, I was able to see that 
-                        the ranging time is 97ms with .stopRanging() and 95ms without 
-                        the .stopRanging() function.
-
+                        pitch_ga = (pitch+myICM.gyrX()*dt)*0.8 + pitch_a*0.2;
+                        roll_ga = (roll+myICM.gyrY()*dt)*0.8 + roll_a*0.2;
                     </p>
 
+
+
+                    <p>
+                        Aft
+
+                    </p>
                     <p> 
                         <img src="assets/port.jpg" alt="..." width="55%" />
                     </p>
@@ -202,22 +226,10 @@
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">2 TOF Sensors</h3>
+                    <h3 class="mb-0">Sampling Data</h3>
                    
                     <p>
-                        When hooking up both TOF sensors, I had to 
-                        I set up the initialization of both TOF sensors first, shut down one 
-                        of the sensors, and change the address of the other sensor. Then the first
-                        sensor is turned bck on. 
-                        My loop executes __ fast, and the current limiting factor is 
-                        the ranging time. 
-                        One issue that I had faced was the speed of the readings, it would 
-                        sometimes get stuck and not continue to display the measurements. 
-                        I used .startRanging() instead of .stopRanging() to only iitialize 
-                        the sensors once and also used .checkForDataReady() to only print
-                        the appropiate distance reading if there is a new reading available. 
-                        This is similar to the implementation of the notification handler
-                        in the previous lab. 
+                        Whe
 
                     </p>
                 </div>
@@ -225,16 +237,52 @@
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">TOF + Bluetooth</h3>
+                    <h3 class="mb-0">Cut the Coord!</h3>
                    
                     <p>
-                        Combining the TOF sensor data with the bluetooh functionality from the 
-                        previous lab, I slightly altered the temperature command to 
-                        instead be able to send TOF sensor data from the Artemis to the computer. 
-                        To add a new command, the arduino sketch, the cmd_types file, as well as the demo.ipynb file needed 
-                        to be updated. The new command is able to collect data from both 
-                        sensors for a specified amount of time and then the computer receives 
-                        the reading from both sensors. 
+                        Now, I cut the coord and integrated everything together!
+                        Instead of connecting the Artemis to my computer,
+                        I connected a 650 mAh battery to my Artemis and a 850 mAh 
+                        battery to the robot to power its motor drivers. I wanted to 
+                        ensure the motor drivers had the most powerful battery because 
+                        of how much power it consumes in comparison to the Artemis. 
+                        I also ensured that I was still able to receive bluetooth 
+                        data when the power was connected. 
+
+                    </p>
+                    <p>
+                        After cutting the cord, this is what the new hardware setup looked
+                        like. 
+
+                    </p>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">Record a Stunt!</h3>
+                   
+                    <p>
+                        Fast Robot in action! I finally ran the robot - it took me 
+                        some time to get used to the controls but it definitely 
+                        was a speedy robot.
+
+                    </p>
+                    
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/JZYJbsv7hXY"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+
+
+                    <p>
+                        After practing the current robot, I taped on my Artemis + sensors
+                        + battery onto the car and tried recording a stunt as well. 
+
+                    </p>
+
+                    <p>
+                        insert image here
 
                     </p>
                 </div>
