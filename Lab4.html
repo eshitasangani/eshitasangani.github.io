@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>ECE 4160: Lab 3</title>
+        <title>ECE 4160: Lab 4</title>
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -28,8 +28,8 @@
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html">About</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab1.html">Lab 1</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab2.html" >Lab 2</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab3.html">Lab 4</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab4.html" style="color: rgb(31, 78, 47);">Lab 3</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab3.html">Lab 3</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab4.html" style="color: rgb(31, 78, 47);">Lab 4</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab5.html">Lab 5</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab6.html">Lab 6</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab7.html">Lab 7</a></li>
@@ -44,48 +44,64 @@
     <!-- Page Content-->
     <section class="resume-section" id="experience">
         <div class="resume-section-content">
-            <h2 class="mb-2">Lab 3 <span class="text-primary">Time of Flight Sensors</span></h2>
+            <h2 class="mb-2">Lab 4 <span class="text-primary">IMU Sensor</span></h2>
             <p class="mb-5">
                 
-                The purpose of this lab was to gain familiarity with time of flight sensors, one of 
-                the first sensors that we will equip our robot with. 
+                The purpose of this lab was to gain familiarity with IMU sensors, another of 
+                the sensors that we will equip our robot with as well beginning
+                the run stunts on our robot. 
                 </p>
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">I2C Setup</h3>
+                    <h3 class="mb-0">IMU Setup</h3>
                     
                     <p>
-                        Since we will be using 2 TOF sensors, we have to make sure that we are 
-                        able to properly process and distinguish the data received from each TOF. 
-                        The address of one of the sensors is already hardwired on the Artemis, so 
-                        we must come up with a way to distinguish the two sensors being used. 
-                        We can either change the address on the software interface or make use 
-                        of the XSHUT pin on the sensor. The XSHUT pin will hold all sensors connected
-                        except for the one that you can then reconfigure. The default I2C address 
-                        is 0x29, as seen in the image below. I chose to enable the sensors separately
-                        through their shutdown pins because you would not need to change 
-                        the address of the sensors every time they power off. In addition, it is more 
-                        power and energy efficient but also comes at the cost of communication delays.
-                        I didn't use the other method because I did not want to have to change the I2C
-                        address every time the sensor is powered off, even though it would give the benefit
-                        of less communication delays. I decided to solder the XSHUT pin of one sensor 
-                        to pin 8 of my Artemis board, which I then used to shut off the corresponding 
-                        sensor during setup and change the address of the other sensor. In the image below,
-                        the address printed is 0x29. 
+                        The IMU measures angular rate and force/acceleration by an 
+                        object - we focus on the accelerometer + gyroscope data. 
+
+                        I conncected the IMU to the Artemis using a QWICC connector 
+                        as seen in the image below. 
                     </p>
 
                     <p> 
                         <img src="assets/port.jpg" alt="..." width="55%" />
                     </p>
-                    
+                       
+                    <p>
+                        I began by installing the SparkFun 9DOF IMU Breakout - 
+                        ICM 20948 library and using the Example1_Basics example.
+                        This prints out the raw accelerometer and gyroscope values,
+                        which can be visualized through the serial plotter. In this 
+                        example, the AD0_VAL is used to change the address of an IMU 
+                        if multiple IMU's are used. In this case, we are only using
+                        1 IMU so the AD0_VAL should be set to 1. 
+
+                        
+                    </p>
+                    <p>
+                        When running this example, I noticed that one of the 
+                        acceleration readings is consistently high - displaying 
+                        gravity - while the others are close to 0 as seen in the 
+                        video. The acceleration usually changes with rotation. 
+                        The gyroscope measures the lateral movement (rotation 
+                        about the axes), also does not feel the effect of gravity,
+                        and is very sensitive to little movements. 
+     
+                    </p>
+
                     <p> 
-                        I chose to place both sensors at the front of my robot. I want to measure 
-                        both distances to be able to develop an accurate frame of reference from 
-                        the front. As they will be placed next to each other, the robot will kind of 
-                        have "eyes" or a full point of view and also can account for blind spots 
-                        in the front. The robot could possibly miss situations on the far sides on 
-                        both sides if it does not fall in the field of view. 
+                        <img src="assets/port.jpg" alt="..." width="55%" />
+                    </p>
+
+                    <p> 
+                        For debugging purposes, I added a visual indicator to see
+                        if the board is running/is stuck. It will blink three times
+                        if the Artemis has turned on with a slight delay.
+                    </p>
+                   
+                    <p> 
+                        <script src="https://gist.github.com/eshitasangani/0eb8fcfd712456b3f0576e9c93bb12e8.js"></script>
                     </p>
 
                 </div>
@@ -93,12 +109,52 @@
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">TOF Connections</h3>
+                    <h3 class="mb-0">ACCELERROMETER</h3>
                    
                     <p>
-                        The 
+                        In order to convert the accelerometer data to pitch and roll, I used
+                        the sample code from the IMU lecture as a base. Pitch is the 
+                        rotation around the X axis and roll is the rotation around the Y axis
+                        and can be calculated as seen below. 
 
                     </p>
+                    <p>
+                        Pitch: θ = atan2(x_accel , z_accel)
+                        Roll: 𝜙 = atan2(y_accel, z_accel)
+                    </p>
+                    <p> 
+                        <img src="assets/port.jpg" alt="..." width="55%" />
+                    </p>
+
+                    <p>
+                        I then visualized the output at -90, 0, and 90 degrees for pitch and roll. 
+                    </p>
+                    <p> 
+                        <!-- insert image here -->
+                        <img src="assets/pitch-90.jpg" alt="..." width="55%" />
+                    </p>
+                    <p> 
+                        <!-- insert image here -->
+                        <img src="assets/pitch90.jpg" alt="..." width="55%" />
+                    </p>
+                    <p> 
+                        <!-- insert image here -->
+                        <img src="assets/roll-90.jpg" alt="..." width="55%" />
+                    </p>
+                    <p> 
+                        <!-- insert image here -->
+                        <img src="assets/roll90.jpg" alt="..." width="55%" />
+                    </p>
+
+                    <h4 class="mb-0"> Accelerometer Noise </h3>
+                        <p> 
+                            However, the accelerometer is very noisy, especailly if the RC car is running, because of the noise 
+                            from the motors. I ran an FFT on that data - resulting in not too much noise. This led me to use 
+                            a low pas filter to make the accelerometer more sensitive to that noise when it is on the car. 
+                            The FFT analysis is shown below. Through this, the frequency found was under .1 Hz, illustrating 
+                            that the noise was reduced. 
+                        </p>
+
                 </div>
             </div>
 

@@ -94,27 +94,21 @@
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0">TOF Connections</h3>
-                   
-                    <p>
-                        The 
-
+                    <p> 
+                        <img src="assets/tof.jpg" alt="..." width="55%" />
                     </p>
+
+                    <p> 
+                        <img src="assets/fulltof.jpg" alt="..." width="55%" />
+                    </p>
+
                 </div>
             </div>
 
-            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">TOF 1 Readings</h3>
-                   
-                    <p>
-
-                    </p>
-                </div>
-            </div>
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">TOF Modes</h3>
+                    <h3 class="mb-0">TOF Modes + Readings</h3>
                    
                     <p>
                         The TOF sensor has 3 modes that can be used - short, medium, and long. 
@@ -130,7 +124,12 @@
                         After deciding which mode to use, I used the ReadDistance example 
                         from the Soarkfun library on one of the TOF sensors to understand 
                         how the short mode would use. I took the measurements in 4 cm 
-                        increments from 0 cm to 150 cm. The standard deviation of the data 
+                        increments from 0 cm to 150 cm. I measured this using the white 
+                        box as a frame of reference as seen in the picture below, and 
+                        measured 
+                        
+                        
+                        The standard deviation of the data 
                         is miniscule, confirming the repeatability of the short distance mode.
                         Using the stopRanging() function, I was able to see that 
                         the ranging time is 97ms with .stopRanging() and 95ms without 
@@ -172,7 +171,7 @@
                     <h3 class="mb-0">TOF + Bluetooth</h3>
                    
                     <p>
-                        Combining the TOF sensor data with the bluetooh functionality from the 
+                        Combining the TOF sensor data with the bluetooth functionality from the 
                         previous lab, I slightly altered the temperature command to 
                         instead be able to send TOF sensor data from the Artemis to the computer. 
                         To add a new command, the arduino sketch, the cmd_types file, as well as the demo.ipynb file needed 
