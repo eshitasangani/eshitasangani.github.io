@@ -116,6 +116,10 @@
                     </p>
                     <p>
                         Pitch: θ = atan2(x_accel , z_accel)
+                      
+                    </p>
+                    <p>
+                        
                         Roll: 𝜙 = atan2(y_accel, z_accel)
                     </p>
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/rymEHaL91Ek"
@@ -188,9 +192,28 @@
                     </p>
                     <p>
                         pitch_g = pitch_g + myICM.gyrX()*dt;
+                        
+                    </p>
+                    <p>
+                       
                         roll_g = roll_g + myICM.gyrY()*dt;
+                        
+                    </p>
+                    <p>
+                        
                         yaw_g = yaw_g + myICM.gyrZ()*dt;
                     </p>
+                    <p>
+                        
+                        When I rotated the board about either the x, y, or z axis, I could 
+                        see the yaw, pitch, roll change accordingly.  
+                    </p>
+
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/4_u0KXu9pdo"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+
                 </div>
             </div>
 
@@ -204,23 +227,31 @@
                         In order to combine the benefits of both the accelerometer 
                         and gyroscope, I implemented a complementary filter using 
                         the below equations:
-
                     </p>
                     
                     <p>
                         pitch_ga = (pitch+myICM.gyrX()*dt)*0.8 + pitch_a*0.2;
+                    </p>
+                    <p>
+                        
                         roll_ga = (roll+myICM.gyrY()*dt)*0.8 + roll_a*0.2;
                     </p>
 
-
-
                     <p>
-                        Aft
+                        When using the complementary filter, I noticed that
+                        I still have some noise because my alpha value was 0.8, 
+                        as I wanted to get the most accurate readings which came 
+                        at the cost of noise. My readings became more accurate when 
+                        implementing the complementary filter as it combined 
+                        the best parts of using the gyroscope and accelerometer. 
 
                     </p>
-                    <p> 
-                        <img src="assets/port.jpg" alt="..." width="55%" />
-                    </p>
+                    
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/AjrlvxOb5CQ"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+
                 </div>
             </div>
 
