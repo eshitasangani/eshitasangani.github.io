@@ -139,20 +139,21 @@
                 </div>
             </div>
 
-
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0">Install In The Car!!</h3>
-
                     <p>
                         After testing the functionality of everything, I 
                         put the car on the ground and messed around with it 
                         a little just to get an idea of how to control the robot.
                     </p>
                     <p>
-                        A
+                        By slowly increasing the PWM value, I could see that 
+                        the lower limit of the PWM value was found to be around
+                        40 for the right motor at the front facing 
+                        orientation and around 43 for the left motor at that same 
+                        orientation.
                     </p>
-
                 </div>
             </div>
 
@@ -161,7 +162,14 @@
                     <h3 class="mb-0">Open Loop Control</h3>
                    
                     <p>
-                        
+                        Next, I added open loop control to my robot with this 
+                        sequence below to move the robot a little bit forward 
+                        and then be able to stop. I was a little uncertain 
+                        because 
+
+                        I didn't end up having a calibration factor because 
+                        it seemed like the robot was moving pretty steadily 
+                        and equally from both motors.
 
                     </p>
 
