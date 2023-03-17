@@ -221,6 +221,9 @@
                 </div>
             </div>
 
+
+
+
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0">Complementary Filter</h3>
@@ -259,16 +262,39 @@
                 </div>
             </div>
 
-            <!-- <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0">Sampling Data</h3>
                    
                     <p>
-                        Whe
+                        When getting the data from the IMU, I wanted to make sure that 
+                        we didn't want to wait for the IMU data to be ready and would  
+                        only want to check if the data is ready for every iteration 
+                        of the main loop(), and store it in the corresponding array
+                        accordingly. I stored the time stamped IMU data 
+                        in 3 arrays - time, pitch, and roll, which can be seen below. 
+
+                    </p>
+
+                    <p>
+                        I wanted to integrate my lab 3 code with this lab 
+                        and be able to send TOF + IMU data at once. Previously,
+                        I only had one BLE string characteristic that would receive 
+                        all the data but since the TOF + IMU had very different sampling 
+                        rates, I created another characteristic to ensure that 
+                        both could be checked for and called at the same time. 
+
+                    </p>
+
+
+                    <p>
+                        In addition, I then captured 5s of IMU + TOF data from the 
+                        sensors and then sent it over bluetooth to my computer - 
+                        this is illustrated below. 
 
                     </p>
                 </div>
-            </div> -->
+            </div>
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
