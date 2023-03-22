@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>ECE 4160: Lab 5</title>
+        <title>ECE 4160: Lab 6</title>
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -30,8 +30,8 @@
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab2.html" >Lab 2</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab3.html" >Lab 2</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab4.html">Lab 4</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab5.html" style="color: rgb(31, 78, 47);">Lab 5</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab6.html">Lab 6</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab5.html">Lab 4</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab6.html" style="color: rgb(31, 78, 47);">Lab 6</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab7.html">Lab 7</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab8.html">Lab 8</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab9.html">Lab 9</a></li>
@@ -44,48 +44,25 @@
     <!-- Page Content-->
     <section class="resume-section" id="experience">
         <div class="resume-section-content">
-            <h2 class="mb-2">Lab 5 <span class="text-primary">Motors and Open Loop Control</span></h2>
+            <h2 class="mb-2">Lab 6 <span class="text-primary">Closed Loop Control using PID</span></h2>
             <p class="mb-5">
                 
-                The purpose of this lab was to add open loop control of the car, instead of manual, and then be 
-                able to integrate it with the Artemis and the dual motor drivers to execute some fun moves.
+                The purpose of this lab was to add closed loop control to the robot in the form of PID
+                to get the robot to stop when it is within one foot of the wall.
                 </p>
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">PRELAB + SETUP</h3>
+                    <h3 class="mb-0">PRELAB - Bluetootg</h3>
                     
                     <p>
-                        We will be using two dual input motor drivers and use the two channels 
-                        to drive each motor as each motor driver has two inputs. 
-                        After reading through the datasheet for the motor drivers, I needed to make 
-                        sure that I was using the right PWM pins on the Artemis to be able to drive
-                        the motor. The Artemis and motor drivers are powered from separate batteries because
-                        the motor uses more energy and also helps reduce the effect of noise on the sensors
-                        because of the motor. It also needs a higher voltage battery in comparison 
-                        to the power consumption of the Artemis. This is a diagram of my setup.
+                        Before beginning this lab, I wanted to ensure that I was able to create a
+                        debuggable 
                         
                     </p>
 
                     <p> 
-                        <img src="assets/setup.jpg" alt="..." width="55%" />
-                    </p>
-
-                    <p> 
-                       When soldering these connections, I made sure to use solid core wires for the 
-                       overlapping pins and ensured to use heat shrink if I had used stranded wire. 
-                       After this setup, I hooked up Vin and Gnd using the power supply and then 
-                       connected the output of each motor driver to the oscilloscope. I used the AnalogWrite() function to generate
-                        PWM signals that could then be observed on the scope. The output of the 
-                        two motor drivers is shown below.
-
-                    </p>
-                    <p> 
-                        <img src="assets/scope.jpg" alt="..." width="55%" />
-                    </p>
-
-                    <p> 
-                        <script src="https://gist.github.com/eshitasangani/69204719c0694c4e774b08cce1f3c0cb.js"></script>
+                       -----------
                     </p>
 
                 </div>
@@ -93,47 +70,22 @@
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">Take the Car Apart!</h3>
+                    <h3 class="mb-0">PID Implementation</h3>
                     <p> 
-                        After testing the functionality of each motor driver, it was 
-                        time to implement the sensors + Artemis + drivers in the car. 
-                        I took out the current PCB that existed in the car 
-                        and replaced it with my setup, as seen below. This also 
-                        included soldering the output of the drivers to the motors 
-                        in the car which was a little tricky because of the way 
-                        I had setup my wires. 
+                        ---------
                     </p>
 
                     <p> 
-                        <img src="assets/carsetup.jpg" alt="..." width="55%" />
+                        -------  
                     </p>
 
-                    <p> 
-                        I placed the car on its side to see if the wheels would spin if 
-                        it was powered by the power supply
-                        as seen in the video below. 
-                    </p>
-
-                    <p> 
-                        Now, instead of powering it by the power supply, I connected the 
-                        850 mAh battery to each dual motor driver to see if the battery 
-                        would be able to power the circuit correctly. This video is seen below.
-                        
-                    </p>
-
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/4tZBuC5_Cpc"
+                    <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/4tZBuC5_Cpc"
                         title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
+                        allowfullscreen></iframe> -->
 
                     <p> 
-                        <script src="https://gist.github.com/eshitasangani/e86dfa110fa79e4ae535385a109b41b0.js"></script>
-                    </p>
-
-                    <p> 
-                        I then replaced the power supply with the 850 mAh battery and made sure 
-                        that it was able to run both motor drivers, which resulting in all 
-                        four wheels spinning.
+                        ------
                     </p>
 
                 </div>
@@ -141,43 +93,22 @@
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">Install In The Car!!</h3>
+                    <h3 class="mb-0">Tuning PID</h3>
                     <p>
-                        After testing the functionality of everything, I 
-                        put the car on the ground and messed around with it 
-                        a little just to get an idea of how to control the robot.
+                        ------
                     </p>
-                    <p>
-                        By slowly increasing the PWM value, I could see that 
-                        the lower limit of the PWM value was found to be around
-                        40 for the right motor at the front facing 
-                        orientation and around 43 for the left motor at that same 
-                        orientation.
-                    </p>
+
                 </div>
             </div>
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">Open Loop Control</h3>
+                    <h3 class="mb-0">Demonstration of PID</h3>
                    
                     <p>
-                        Next, I added open loop control to my robot with this 
-                        sequence below to move the robot a little bit forward 
-                        and then be able to stop. I was a little uncertain 
-                        because 
-
-                        I didn't end up having a calibration factor because 
-                        it seemed like the robot was moving pretty steadily 
-                        and equally from both motors.
+                        -----
 
                     </p>
-
-                    <p>
-                        <script src="https://gist.github.com/eshitasangani/1912cc3008cdea95081fc029673cbc08.js"></script>
-                    </p>
-
-
 
                 </div>
             </div>
