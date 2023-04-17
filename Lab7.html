@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>ECE 4160: Lab 6</title>
+        <title>ECE 4160: Lab 7</title>
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -31,8 +31,8 @@
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab3.html" >Lab 2</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab4.html">Lab 4</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab5.html">Lab 4</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab6.html" style="color: rgb(31, 78, 47);">Lab 6</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab7.html">Lab 7</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab6.html">Lab 6</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab7.html" style="color: rgb(31, 78, 47);">Lab 7</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab8.html">Lab 8</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab9.html">Lab 9</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab10.html">Lab 10</a></li>
@@ -44,39 +44,25 @@
     <!-- Page Content-->
     <section class="resume-section" id="experience">
         <div class="resume-section-content">
-            <h2 class="mb-2">Lab 6 <span class="text-primary">Closed Loop Control using PID</span></h2>
+            <h2 class="mb-2">Lab 7 <span class="text-primary">Kalman Filter</span></h2>
             <p class="mb-5">
                 
-                The purpose of this lab was to add closed loop control to the robot in the form of PID
-                to get the robot to stop when it is within one foot of the wall.
+                The purpose of this lab was to use the Kalman filter to speed up the behavior
+                that was executed in Lab 6.
                 </p>
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0">PRELAB - Bluetooth</h3>
-                
+                    
                     <p>
-                        Before beginning this lab, I wanted to ensure that I was able to create a
-                        debuggable system of sending data to be able to tune my PID values better.
-                        I did this by executing PID control over a certain period of time and when 
-                        it is executing, add the data to its associated arrays, and then send 
-                        it over bluetooth once the task is done. 
+                
                     </p>
                     <p> 
                        I chose to do Task A and wanted to use the front TOF sensor to send the data. 
                        Sending the data everytime that I received new data would be too slow so I 
                        stored the data first in the Artemis (in arrays) and then sending it 
-                       over once the flag is set to be true and after 20 seconds
-                       of data have been taken. 
-                       After testing out how many data points I need to test Task A, 
-                       I found out that an array size of 150 is ideal. I collect the time, 
-                       the speed, and then the tof data on the Arduino side. When sent 
-                       over bluetooth, I receive the data and process it using a notification
-                       handler as in previous labs.
-                    </p>
-
-                    <p>
-                        <script src="https://gist.github.com/eshitasangani/0886327db085d3fb4fce842809c17765.js"></script>
+                       over once the flag is set to be true.
                     </p>
 
                 </div>
@@ -86,28 +72,11 @@
                 <div class="flex-grow-1">
                     <h3 class="mb-0">PID Implementation</h3>
                     <p> 
-                        Closed Loop Control is used because we wanted the system to be able 
-                        to make its own adjustments -- the current output is sensed and compared
-                        with the desired output and then the error between the two is used to adjust
-                        the control input to the system. Using this error, the robot, in our  case,
-                        can slowly move itself toward the desired state. This is implemented using PID
-                        control. 
+                        ---------
                     </p>
 
                     <p> 
-                        PID stands for Proportional Integral Derivative and the controller is composed
-                        of these terms which are summed together to form the control input. I chose to 
-                        implement a P controller - it is proportional to the current error between 
-                        the measured and desired error. This controller will take in the error signal 
-                        and kp value as input. The Kp value wil calculate the speed of the robot 
-                        proportionally based on the error between the current + target (which is 
-                        detected based on the TOF sensor). This is seen in the code snippet below. 
-                        I also added a limit speed section based on my results from Lab 5, to ensure 
-                        that the robot would move even if it goes beyond the max/min speed limits.
-                    </p>
-
-                    <p>
-                        <script src="https://gist.github.com/eshitasangani/4a320e648e9897cda820db742a6e4fa7.js"></script>
+                        -------  
                     </p>
 
                     <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/4tZBuC5_Cpc"
@@ -115,6 +84,9 @@
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen></iframe> -->
 
+                    <p> 
+                        ------
+                    </p>
 
                 </div>
             </div>
@@ -123,15 +95,8 @@
                 <div class="flex-grow-1">
                     <h3 class="mb-0">Tuning PID</h3>
                     <p>
-                        I started off with just a P controller so I could tune that value 
-                        accordingly to understand how my robot reacted to the small changes 
-                        and then wanted to add the I as well if there was time.
+                        ------
                     </p>
-
-                    <!-- <p>
-                        I started off with a Kp value of 0.03 - in this case 
-                    </p> -->
-
 
                 </div>
             </div>
