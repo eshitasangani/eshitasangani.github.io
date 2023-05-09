@@ -48,21 +48,30 @@
             <p class="mb-5">
                 
                 The purpose of this lab was to use the Kalman filter to speed up the behavior
-                that was executed in Lab 6.
+                that was executed in Lab 6 as well as make it more accurate.
+                The Kalman filter uses the TOF sensor readings 
+                to make a more precise position estimate based on the pwm input as well. 
                 </p>
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">PRELAB - Bluetooth</h3>
+                    <h3 class="mb-0">DRAG + MOMEMTUM ESTIMATE</h3>
                     
                     <p>
-                
+                        Before creating a Kalman filter, I wanted to create a state space
+                        model for my robot based on the lecture in class. I used a step 
+                        response to be able to measure the TOF + PWM data as the robot moved.
+                        I then plotted these graphs below. 
                     </p>
                     <p> 
-                       I chose to do Task A and wanted to use the front TOF sensor to send the data. 
-                       Sending the data everytime that I received new data would be too slow so I 
-                       stored the data first in the Artemis (in arrays) and then sending it 
-                       over once the flag is set to be true.
+                        To find the values of drag and momentum, I used the A matrix that 
+                        was discussed in lecture and the equations for d and m
+                    </p>
+                    <p> 
+                        d = u / ẋ
+                    </p>
+                    <p> 
+                        m = -dt / ln (1 - 0.9)
                     </p>
 
                 </div>
@@ -70,7 +79,7 @@
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">PID Implementation</h3>
+                    <h3 class="mb-0">INITIALIZE KALMAN FILTER</h3>
                     <p> 
                         ---------
                     </p>

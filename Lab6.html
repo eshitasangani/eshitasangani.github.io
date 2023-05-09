@@ -82,7 +82,6 @@
                     <p>
                         <script src="https://gist.github.com/eshitasangani/ad7be953d5003151cebd2a0f59f4c1fb.js"></script>
                     </p>
-
                 </div>
             </div>
 
@@ -128,13 +127,37 @@
                     <p>
                         I started off with just a P controller so I could tune that value 
                         accordingly to understand how my robot reacted to the small changes 
-                        and then wanted to add the I as well if there was time.
+                        and then wanted to add the I as well if there was time. My goal was 
+                        to drive the robot towards a wall and then have it stop when 
+                        it reaches 304 cm (1 ft) from the wall. I will do this using the 
+                        TOF sensor readings
+                        and then change my KP value based on the PWM output from the motors 
+                        and also how it visually responds. 
+
                     </p>
 
-                    <!-- <p>
-                        I started off with a Kp value of 0.03 - in this case 
-                    </p> -->
+                    <p>
+                        I started off with a Kp value of 0.09 - just to see how my robot reacts 
+                        to the PID control. This value was way too high and resulted in my robot 
+                        shooting towards the wall and essentially crashing into the wall. It wasn't 
+                        able to break quickly enough to prevent the giant overshoot which is what resulted
+                        in the crash. Another reason that it could potentially overshoot is because 
+                        I am only using the proportional value of the error and not the integral + derivative. 
+                        
+                        The next value I tried was 0.04 which was more reasonable but it still
+                        had a slight movement backwards and wasn't able to get the distance correctly on 
+                        the first try. I then tried 0.01, which ended up being too little, and the robot
+                        didn't even move since it didn't have enough drive to do so. After trying these 
+                         values, I picked 0.035 which ended up being the most ideal combination and stopped 
+                         almost exactly one foot from the wall. 
+                    </p>
 
+                    <p>
+                        Something that also affected my KP value was the surface that I was practicing on. 
+                        When I tried it on carpeted surfaces, it ended up working better with higher Kp values
+                        in comparison to the floors in Upson + Philips. I ended up using the floors in Upson 
+                        for my PID control.  
+                    </p>
 
                 </div>
             </div>
@@ -144,9 +167,44 @@
                     <h3 class="mb-0">Demonstration of PID</h3>
                    
                     <p>
-                        -----
+                        PID w KP = 0.035
 
                     </p>
+                    <video width="500" controls>
+                        <source src="assets/pidwork.mp4" type=video/mp4>
+                    </video>
+                    <p>
+                        I also plotted the TOF vs Time + PWM vs Time for the most ideal run which
+                        was when the Kp value was 0.035. 
+                    </p>
+
+                    <p> 
+                        <img src="assets/toftime.jpg" alt="..." width="55%" />
+                    </p>
+
+                    <p> 
+                        <img src="assets/pwmtime.jpg" alt="..." width="55%" />
+                    </p>
+                    
+                    <p>
+                        PID w KP = 0.09
+
+                    </p>
+
+                    <video width="500" controls>
+                        <source src="assets/pidovershoot.mp4" type=video/mp4>
+                    </video>
+
+
+                    <p>
+                        PID w KP = 0.01
+
+                    </p>
+
+                    <video width="500" controls>
+                        <source src="assets/pidovershoot.mp4" type=video/mp4>
+                    </video>
+
 
                 </div>
             </div>
