@@ -154,7 +154,11 @@
                     <h3 class="mb-0">IMPLEMENTATION: Sensor Model</h3>
                     <p> 
                         This is the equivalent of p(z|x), which is the probaility 
-                        that 
+                        that a robot measures some specified distance based on 
+                        what it should have measured from the current angle 
+                        and position. This has 18 potential probabilities because 
+                        there are 18 different values that the robot measures distance 
+                        at.
 
                     </p>
 
@@ -165,17 +169,28 @@
                 </div>
             </div>
 
+
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">Demonstration of PID</h3>
-                   
-                    <p>
-                        -----
+                    <h3 class="mb-0">IMPLEMENTATION: Update Step</h3>
+                    <p> 
+                        This is where the actual model is being updated - in our 
+                        case it would be the sensor model. It returns the 
+                        belief of the robot based on the past sensor measurements 
+                        by looping through all possible positions and comparing 
+                        the known measurements to the actual measurements of teh sesnor of the current 
+                        position. The update is then done by multiplying 
+                        P(z|x) by the predicted belief loc.bel_bar found during the prediction step.
 
+                    </p>
+
+                    <p> 
+                        <script src="https://gist.github.com/eshitasangani/790cbdf8cf8752afe8e84ee4be56e374.js"></script>
                     </p>
 
                 </div>
             </div>
+
 
         </div>
 
