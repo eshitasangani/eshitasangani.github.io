@@ -162,6 +162,7 @@
                 </div>
             </div>
 
+
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0">Demonstration of PID</h3>
@@ -171,8 +172,9 @@
 
                     </p>
                     <video width="500" controls>
-                        <source src="assets/pidwork.mp4" type=video/mp4>
+                        <source src="assets/pidworking.mp4" type=video/mp4>
                     </video>
+
                     <p>
                         I also plotted the TOF vs Time + PWM vs Time for the most ideal run which
                         was when the Kp value was 0.035. 
@@ -188,26 +190,59 @@
                     
                     <p>
                         PID w KP = 0.09
-
+                        The PID value is too big and it overshoots.
                     </p>
 
                     <video width="500" controls>
                         <source src="assets/pidovershoot.mp4" type=video/mp4>
                     </video>
 
+                    <p>
+                        I also plotted the TOF vs Time + PWM vs Time for the overshoot run which
+                        was when the Kp value was 0.09. In this graphs, the oscillation is visible
+                        and it kinda goes all over the place.
+                    </p>
+
+                    <p> 
+                        <img src="assets/1.jpg" alt="..." width="55%" />
+                    </p>
+
+                    <p> 
+                        <img src="assets/2.jpg" alt="..." width="55%" />
+                    </p>
 
                     <p>
                         PID w KP = 0.01
-
+                        The PID value is too small and it doesn't move. 
                     </p>
 
+
                     <video width="500" controls>
-                        <source src="assets/pidovershoot.mp4" type=video/mp4>
+                        <source src="assets/notwork.mp4" type=video/mp4>
                     </video>
 
 
                 </div>
             </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">Range + Sampling Time</h3>
+                
+                    <p>
+                        Before conducting this PID lab, I made sure in the prelab to avoid 
+                        delays without sending data while the PID control is executing and
+                        removing any print statements for debugging. Regardless of this, 
+                        each iteration of the loop takes around 0.09 seconds, meaning
+                        the sampling frequency is 15 samples per second. 
+
+                    </p>
+
+
+                </div>
+            </div>
+
+
 
         </div>
     </section>
