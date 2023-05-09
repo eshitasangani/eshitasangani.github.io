@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>ECE 4160: Lab 10</title>
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                <span class="d-block d-lg-none">Eshita Sangani</span>
+                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/profile.jpg" alt="..." /></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab1.html">Lab 1</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab2.html" >Lab 2</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab3.html" >Lab 2</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab4.html">Lab 4</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab5.html">Lab 4</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab6.html">Lab 6</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab7.html">Lab 8</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab8.html">Lab 8</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab9.html">Lab 9</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab10.html" style="color: rgb(31, 78, 47);">Lab 10</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab11.html">Lab 11</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab12.html">Lab 12</a></li>
+                </ul>
+            </div>
+        </nav>
+    <!-- Page Content-->
+    <section class="resume-section" id="experience">
+        <div class="resume-section-content">
+            <h2 class="mb-2">Lab 10 <span class="text-primary">Grid Localization using Bayes Filter</span></h2>
+            <p class="mb-5">
+                
+                The purpose of this lab was to implement grid localization on a simulator 
+                using the Bayes Filter. We used a simulator to mimic the behvaior of the 
+                robot as it moves through a map on a jupyter notebook.
+                </p>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">Pre Lab</h3>
+                    
+                    <p>
+                        When implementing localization, we want to determine the location 
+                        of the robot with respect to the environment. This is when 
+                        we can use a Bayes Filter to use the robot's knowledge of its control 
+                        inputs and uses the observation data in addition to localize the robot.
+                    </p>
+
+                    <p> 
+                        The Bayes Filter will calculate the belief that the robot 
+                        exists in a potentially infinite number of positions.
+                        To do this, we have discretized our map to be (12,9,18) for x,
+                        y and theta. Each value within the map corresponds to the 
+                        robot location and its orientation as wel as the probability 
+                        of it being there.
+                    </p>
+
+                    <p> 
+                        <img src="assets/bayes.jpg" alt="..." width="55%" />
+                    </p>
+
+                    <p> 
+                        Each square in our grid is of size (0.3048 m, 0.3048 m, 20 degrees). 
+                        This reduces the number of positions that the Bayes Filter has to 
+                        consider and speeds up our running time significantly which is good.
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">IMPLEMENTATION: Compute Control</h3>
+                    <p> 
+                        The compute control function - as seen below - is responsible 
+                        for outputting u (the control input) based on a current position and previous 
+                        position. These were found using the equations in lecture. 
+                    </p>
+
+                    <p> 
+                        <img src="assets/ctrl.jpg" alt="..." width="55%" />
+                    </p>
+
+                    <p> 
+                        <script src="https://gist.github.com/eshitasangani/f036aa6b1df1db0eefae5581b9682b50.js"></script>
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">IMPLEMENTATION: Odometry Model</h3>
+                    <p> 
+                        This function is responsible for calculating the probability 
+                        of the state transition. We want to find the probability that 
+                        the robot has reached a position given the previous position 
+                        and the control inputs. This likelihood is calculated using
+                        a gaussian distribution done upon the robot's expected movement 
+                        and the previous position. This is basically doing the 
+                        P(x' | x, u) from the image above. 
+
+                    </p>
+
+                    <p> 
+                        <script src="https://gist.github.com/eshitasangani/94c84a3aff364572ea6b29f6983b0b8f.js"></script>
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">IMPLEMENTATION: Prediction Step</h3>
+                    <p> 
+                        This is where the actual predictions occur of the Bayes
+                        Filter. Based on the 
+                        current and previous outputs from the Odometry model, 
+                        the bel_bar probability is updated. With our map being discretized
+                        into 12*9*18 = 1944 potential states, we will loop through 
+                        each possible state and calculate the likelihood of being in this state.
+                        However, we also want to add a threshold on it to ignore the locations 
+                        that the robot is extremely unlikely to be at - so greater than 0.0001. 
+
+                    </p>
+
+                    <p> 
+                        <script src="https://gist.github.com/eshitasangani/27f1014bffb857db2df90cb8ba711907.js"></script>
+                    </p>
+
+                </div>
+            </div>
+
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">IMPLEMENTATION: Sensor Model</h3>
+                    <p> 
+                        This is the equivalent of p(z|x), which is the probaility 
+                        that 
+
+                    </p>
+
+                    <p> 
+                        <script src="https://gist.github.com/eshitasangani/6bae8de339331a029606ae9c3cd3f8dd.js"></script>
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">Demonstration of PID</h3>
+                   
+                    <p>
+                        -----
+
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </section>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>
