@@ -152,14 +152,55 @@
                         <img src="assets/other.jpg" alt="..." width="55%" />
                     </p>
 
+                    <p> 
+                        After calculating these respective values + matrices, 
+                        I implemented this initialization in python using the code snippet
+                        below. 
+                    </p>
+
+                    <p>
+                        <script src="https://gist.github.com/eshitasangani/0fb6e01fdb170c9c9db835b30ef0b299.js"></script>
+                    </p>
                 </div>
             </div>
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">Tuning PID</h3>
+                    <h3 class="mb-0">KALMAN IN PYTHON</h3>
                     <p>
-                        ------
+                        I then needed to actually check if the Kalman filter could work 
+                        based on the parameters I calculated and the earlier run talked about 
+                        above. This code snippet is shown below. 
+                    </p>
+                    <p>
+                        <script src="https://gist.github.com/eshitasangani/19ca28237de5b1ab323806beb4bf386d.js"></script>
+                    </p>
+                    <p>
+                        Running KF on the parameters calculated gave this plot. The KF filtered was 
+                        pretty accurate with most of the points being the same, but I still 
+                        wanted to mess around with the values to see if I could get it even more 
+                        accurate.
+                    </p>
+                    <p> 
+                        <img src="assets/kf1.jpg" alt="..." width="55%" />
+                    </p>
+                    <p>
+                        I didn't change my values for sig1 and sig2 - I instead adjusted sig3 
+                        so that the sensor data would be less used and it would focus more on the model 
+                        making the plot more accurate. 
+                    </p>
+                    <p> 
+                        <img src="assets/kf2.jpg" alt="..." width="55%" />
+                    </p>
+
+                    <p>
+                        Now, I also wanted to see how much the sig values would have to change
+                        to introduce a lot of uncertainty to the model. Changing sig1 and sig2 
+                        did not really affect the plot that much so instead I made sig3 150 
+                        and saw the drastic effect away from the raw data. 
+                    </p>
+                    <p> 
+                        <img src="assets/kf3.jpg" alt="..." width="55%" />
                     </p>
 
                 </div>
