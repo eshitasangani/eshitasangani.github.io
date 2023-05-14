@@ -208,12 +208,28 @@
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">Demonstration of PID</h3>
+                    <h3 class="mb-0">KF ON ROBOT</h3>
+                    <p>
+                        Eventually, I wanted to implement the same task as lab 6 using 
+                        the kalman filter with the calculated parameters from above.  
+                     </p>
                    
                     <p>
-                        -----
-
+                       After figuring out the best possible parameters -- ended up 
+                       deciding sig1 = sig2 = 36.76 and sig3 = 10 -- I implemented 
+                       the KF on the robot. I was pretty confused on how to get 
+                       matrices and all the necessary computation 
                     </p>
+
+                    <p>
+                        <script src="https://gist.github.com/eshitasangani/bed48aff047de0d1d7aafff3341e6ebd.js"></script>
+                    </p>
+
+                    <video width="500" controls>
+                        <source src="assets/kf.mp4" type=video/mp4>
+                    </video>
+
+                   
 
                 </div>
             </div>
