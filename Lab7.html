@@ -99,7 +99,28 @@
                     <p> 
                         t(0.9)= 1.25 s
                     </p>
+
+                    <p> 
+                        Now, from these values I can caluclate the drag and mass values
+                        from the equations specified above. 
+                    </p>
+                    <p> 
+                        d = 1 / 1900 = 0.00053
+                    </p>
+                    <p> 
+                        m = -0.00053 * 1.25 / ln(1-0.9) = 0.00029
+                    </p>
         
+                    <p> 
+                        After calculating the values for drag and momentum, I then plugged 
+                        them into the A and B matrices from the Kalman filter equations. 
+                    </p>
+                    <p> 
+                        <img src="assets/A.jpg" alt="..." width="55%" />
+                    </p>
+                    <p> 
+                        <img src="assets/B.jpg" alt="..." width="55%" />
+                    </p>
 
                 </div>
             </div>
@@ -108,16 +129,27 @@
                 <div class="flex-grow-1">
                     <h3 class="mb-0">INITIALIZE KALMAN FILTER</h3>
                     <p> 
-                        ---------
+                       From the first part, I had already measured my robot's step response 
+                       and then just continued to use that data to then be able to initialize 
+                       the Kalman filter. Now for the actual implementation: 
                     </p>
 
                     <p> 
-                        -------  
+                        I first discretized the A and B matrices based on my calculated sampling rate. 
+                        The sampling rate was calculating by finding the difference on average of 
+                        the TOF data. This gave me a sampling rate of 0.074 s. I used this as my Δt value. 
                     </p>
 
-
                     <p> 
-                        ------
+                        For my C matrix, I used the one from class: [[-1, 0]] 
+                        since we only used the TOF data and we measured negative 
+                        distance. For the state vector, I initialized it 
+                        with the initial distance from the wall and 
+                        set the velocity to be 0 as it was stationary.
+
+                    </p>
+                    <p> 
+                        <img src="assets/other.jpg" alt="..." width="55%" />
                     </p>
 
                 </div>
