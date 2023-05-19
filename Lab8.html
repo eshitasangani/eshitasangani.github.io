@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>ECE 4160: Lab 8</title>
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                <span class="d-block d-lg-none">Eshita Sangani</span>
+                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/profile.jpg" alt="..." /></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab1.html">Lab 1</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab2.html" >Lab 2</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab3.html" >Lab 3</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab4.html">Lab 4</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab5.html">Lab 5</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab6.html">Lab 6</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab7.html">Lab 7</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab8.html" style="color: rgb(31, 78, 47);">Lab 8</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab9.html">Lab 9</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab10.html">Lab 10</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab11.html">Lab 11</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab12.html">Lab 12</a></li>
+                </ul>
+            </div>
+        </nav>
+    <!-- Page Content-->
+    <section class="resume-section" id="experience">
+        <div class="resume-section-content">
+            <h2 class="mb-2">Lab 8 <span class="text-primary">STUNTS</span></h2>
+            <p class="mb-5">
+                
+                The purpose of this lab is to use what we have done in the previous labs 
+                to be able to control the robot in a fast stunt (living up to the name
+                of the class). Based on the previous labs, we know that this robot can 
+                be programmed to react to incoming information utilizing the Kalman 
+                filter. 
+                </p>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">Position Control</h3>
+                    
+                    <p>
+                        I chose to do Task A: Position Control. This means that 
+                        when the robot reaches the black sticky mat, it should 
+                        do a flip and then drive back to the starting line as 
+                        quickly as possible. 
+                    </p>
+
+                    <p> 
+                        In order to do this, I drove the robot forward as fast as possible
+                        from 2 meters away from the wall. Then, when the robot is around 
+                        0.5 meters away from the wall, the robot will flip and then it
+                        will drive back as fast as possible. To make the robot flip, 
+                        it has to immediately reverse and drive back as fast as possible. 
+                        I tried a few different methods to get my robot to flip - changing 
+                        the orientation, stopping the car for a millisecond before reversing, 
+                        and trying to hardcode the flip. These did not work unfortunately because 
+                        I think the robot was too forward heavy so it would not flip :(. I have attached 
+                        the code that I used. 
+                    </p>
+
+                    <p> 
+                        <script src="https://gist.github.com/eshitasangani/4a67bf88c0f5f57926bf82a2dca98e07.js"></script>
+                    </p>
+
+                    <p> 
+                        PID control was not used in this lab because I didn't want the robot to slow down 
+                        and then stop and then flip. We needed the momentum to be able to flip the robot quickly.
+                        Looking back, I should have implemented the Kalman Filter in conjunction with this so 
+                        it would be able to accurately predict the distance because the TOF sensors were a little wonky.
+                        It took a lot of testing to be able to figure out the perfect distance that would allow the 
+                        robot to flip. If I wasn't super pressed for time, I would have added the Kalman Filter 
+                        using what I calculated. 
+
+                    </p>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">STUNT</h3>
+                    <p> 
+                       I worked with Grace on this lab. Sadly, we were not succesful 
+                       in flipping the robot. The robot would drive forward 
+                       as fast as possible and then immediately reverse without flipping. 
+                       It seems like there was not enough momentum to be able to flip it.
+                       We tried flipping the robot at different times as well because 
+                       of how dependent it was on the surrounding conditions. The amount 
+                       that the battery was charged + the floor stickiness also influenced 
+                       if the robot would flip or not. 
+                    </p>
+                    <p> 
+                        Using a fully charged battery made the robot go at the max speed 
+                        but then also kinda veer around which was unfortunate as well. 
+                     </p>
+
+                     <p> 
+                        After this being unsuccessful, we reverted back to open loop control 
+                        to see if the robot even had a capability to flip or not. It seemed like 
+                        since the distribution of weight was uneven, it would not flip. 
+                        Even if we started the robot backwards and upside down, it would still not 
+                        flip which was super weird. 
+                     </p>
+                     
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">Acknowledgements</h3>
+                    <p>
+                        BTW: I ended up frying my Artemis and 
+                        my robot died :(. I worked with Grace on this lab.
+                     </p>
+                
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>ECE 4160: Lab 9</title>
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                <span class="d-block d-lg-none">Eshita Sangani</span>
+                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/profile.jpg" alt="..." /></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab1.html">Lab 1</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab2.html" >Lab 2</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab3.html" >Lab 2</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab4.html">Lab 4</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab5.html">Lab 4</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab6.html">Lab 6</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab7.html">Lab 7</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab8.html">Lab 8</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab9.html" style="color: rgb(31, 78, 47);">Lab 9</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab10.html">Lab 10</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab11.html">Lab 11</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab12.html">Lab 12</a></li>
+                </ul>
+            </div>
+        </nav>
+    <!-- Page Content-->
+    <section class="resume-section" id="experience">
+        <div class="resume-section-content">
+            <h2 class="mb-2">Lab 9 <span class="text-primary">MAPPING</span></h2>
+            <p class="mb-5">
+                
+                The purpose of this lab is to use the TOF + IMU sensors on my robot 
+                to map out a room. This is done by taking various distance measurements 
+                from different locations around the room. At each location specified 
+                by the lab instructions, I used PID control to spin in a slow circle 
+                and sample data accordingly. After calculating that, I used transformation 
+                matrices to combine all these measurements and eventually build an accurate 
+                map of the room. 
+                </p>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0"> Designing Control</h3>
+                    
+                    <p>
+                        I chose to implement my control system using a PID angular 
+                        speed control. This uses the raw gyroscope data that I recorded 
+                        while spinning the robot at a constant angular velocity around 
+                        the z axis. I definitely wanted to use closed loop control because 
+                        it results in more accurate data and because of the increased 
+                        control it provides me instead of having to deal with 
+                        the environment factors. In implementing this, I tried to spin my 
+                        robot every 20ish degrees and record data accordingly. 
+                    </p>
+
+                    <p> 
+                        I first wanted to recalculate the best PID gain. I started out 
+                        using the 0.05 as my Kp value because I wanted to have my robot rotate 
+                        at a constant speed. The performance was kinda all over the place at first 
+                        because of the battery power. I didn;t want to add an integral term because 
+                        of the windup that it would give and the fluctuation that would happen 
+                        as a result. I tried adding D but it wasn't consistent enough to justify 
+                        incorporating it. 
+                    </p>
+
+                    <p> 
+                        I first wanted to recalculate the best PID gain. I started out 
+                        using the 0.05 as my Kp value because I wanted to have my robot rotate 
+                        at a constant speed. The performance was kinda all over the place at first 
+                        because of the battery power. I didn't want to add an integral term because 
+                        of the windup that it would give and the fluctuation that would happen 
+                        as a result. I tried adding D but it wasn't consistent enough to justify 
+                        incorporating it. From plotting the angular velocity, it's a little noisy, but 
+                        you can see that it rotates around 20 degrees on average. Because it was pretty noisy, 
+                        I added a lowpass filter later on to improve the accuracy of my readings. 
+                        I used open loop control to figure out the min speed that I was able to 
+                        spin the robot at, which was around 90. For every spin, I obtained around 
+                        150 data points, around 15 data points every second. 
+                    </p>
+                    <p> 
+                        This is my code that I used for the PID control and the case. I sent 
+                        all the data after it was done to make sure that the sending did 
+                        not change the execution time of my program. Finding the values was 
+                        difficult because every run was different because of the floor, the battery level, 
+                        and the exact position I placed the robot at. 
+                    </p>
+
+                    <video width="500" controls>
+                        <source src="assets/rotate.mp4" type=video/mp4>
+                    </video>
+
+                    <video width="500" controls>
+                        <source src="assets/slower.mp4" type=video/mp4>
+                    </video>
+
+                    <p> 
+                        <img src="assets/angv.jpg" alt="..." width="55%" />
+                    </p>
+
+                    <p> 
+                        <script src="https://gist.github.com/eshitasangani/3f92f6b77bc5f319a18063125060ce3e.js"></script>
+                    </p>
+
+                    <p> 
+                        <script src="https://gist.github.com/eshitasangani/cca1596b403d89dc08f2743ce754a563.js"></script>
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">@ VARIOUS DISTANCES </h3>
+                    <p> 
+                       After creating this amazing perfect super accurate controller :), I 
+                       then placed it across the 4 different distances across the lab. 
+                       The associated polar plots and TOF vs Time plots are shown for 
+                       each point. 
+                    </p>
+                    <p> 
+                        Plot for (5,3)
+                     </p>
+
+                     <p> 
+                        <img src="assets/minusss.jpg" alt="..." width="55%" />
+                    </p>
+                    <p> 
+                        <img src="assets/first.jpg" alt="..." width="55%" />
+                    </p>
+
+                     <p> 
+                        Plot for (0,3)
+                     </p>
+                     <p> 
+                        <img src="assets/zero.jpg" alt="..." width="55%" />
+                    </p>
+                    <p> 
+                        <img src="assets/zeroooo.jpg" alt="..." width="55%" />
+                    </p>
+                     <p> 
+                        Plot for (-3,-2)
+                     </p>
+                     <p> 
+                        <img src="assets/minus332.jpg" alt="..." width="55%" />
+                    </p>
+                    <p> 
+                        <img src="assets/12.jpg" alt="..." width="55%" />
+                    </p>
+                     <p> 
+                        Plot for (5,-3)
+                     </p>
+                     <p> 
+                        <img src="assets/minus53.jpg" alt="..." width="55%" />
+                    </p>
+                    <p> 
+                        <img src="assets/fivenegative3.jpg" alt="..." width="55%" />
+                    </p>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">MAKE OVERALL MAP</h3>
+                    <p>
+                        Now, I computed the transformation matrices and converted the 
+                        measurements from the TOF sesnor to a frame of reference of thr room. 
+
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">Acknowledgements</h3>
+                    <p>
+                        Right before this lab, I ended up frying my Artemis and 
+                        my robot died :(. I worked with Grace on this lab.
+                     </p>
+                
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>
