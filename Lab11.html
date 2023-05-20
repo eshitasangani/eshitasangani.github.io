@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>ECE 4160: Lab 11</title>
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                <span class="d-block d-lg-none">Eshita Sangani</span>
+                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/profile.jpg" alt="..." /></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab1.html">Lab 1</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab2.html" >Lab 2</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab3.html" >Lab 2</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab4.html">Lab 4</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab5.html">Lab 4</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab6.html">Lab 6</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab7.html">Lab 7</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab8.html">Lab 8</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab9.html">Lab 10</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab11.html" style="color: rgb(31, 78, 47);">Lab 11</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="Lab12.html">Lab 12</a></li>
+                </ul>
+            </div>
+        </nav>
+    <!-- Page Content-->
+    <section class="resume-section" id="experience">
+        <div class="resume-section-content">
+            <h2 class="mb-2">Lab 11 <span class="text-primary"> LOCALIZATION IRL </span></h2>
+            <p class="mb-5">
+                The purpose of this lab is to take what we learned from Lab 10 
+                and then be able to localize on my actual robot using an optimized 
+                version of the code. I used my data from lab 9 to simulate the Bayes 
+                Filter on the robot since those readings were collected at every point 
+                through spinning on its axis. 
+                </p>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0"> LOCALIZATION SIMULATION</h3>
+               
+                    <p>
+                        I started off with testing the localization simulation that was 
+                        provided to us and this is what it resulted in. 
+                    </p>
+                 
+                    <!-- add lOCALIZATION SIUMUALTIONS HERE -->
+
+                    <p> 
+                        The green trajectory is the ground truth 
+                        trajectory - ACTUAL. The blue trajectory is the trajectory according to the 
+                        robot's belief - HAPPEN. The red trajectory is the trajectory based on solely 
+                        the odometry data - ODOM MODEL.
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">OBSERVATION LOOP </h3>
+                    <p> 
+                       After that visualization, I went through the skeleton 
+                       jupyter notebook that was provided to begin to integrate 
+                       the robot with the localization code. This meant that I 
+                       had to implement the perform_observation_loop
+                       function of the class RealRobot. This function 
+                       performs the loop behavior by having the robot do a 360 
+                       degree turn while collecting angular sensor data beginning 
+                       from the same orientation every time. 
+                    </p>
+                    <p> 
+                        To integrate with the simulator, I needed 18 points 
+                        of data at each marked point. From lab 9, my code 
+                        recorded a 15 measurements every second for a total of 
+                        150 data points and usually in increments of 40 degrees. 
+                        This data was not accurate enough for the observation loop 
+                        function so I adapted the Arduino code to maintain 
+                        a spin of 20 degrees per second - but kept everything 
+                        else the same. This code snippet is pasted below. 
+                     </p>
+
+                     <p>
+                        <script src="https://gist.github.com/eshitasangani/b5276ca0e6e20bab44566358d45e27e7.js"></script>
+                     </p>
+
+                </div>
+            </div>
+
+I opted to adapt the 
+            angular speed proportional control code from my mapping lab 9. It 
+            was adapted to maintain a spin of 20 degrees per second, with a 
+            default spin PWM of 100, and take a reading every second for 18 seconds 
+            to produce 18 data points uniformly across 360 degrees. The code is 
+            otherwise functionally identical to lab 9.
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">MAKE OVERALL MAP</h3>
+                    <p>
+                        Now, I computed the transformation matrices and converted the 
+                        measurements from the TOF sesnor to a frame of reference of the room. 
+                        I scaled up the readings of the robot to reference the room. This is 
+                        the function that was used - inspired from ryan - . 
+                    </p>
+                    
+                    <p>
+                        Looking at these readings, my readings were kinda really bad 
+                        and not as clear as I would have wanted. I tried to do some more 
+                        post processing but it honestly just made it worse. Looking back, I 
+                        wish I spent more time getting the same angular readings - because 
+                        of the uncertainty of the floor and orientaion - I used different 
+                        degree turns which led to a lot of mismatches with my measurements. 
+                        Since the angles did not correspond to the same tof measurements for 
+                        each of the 4 measurements, the map was not as precise as I would have wanted. 
+                        I also would have definitely added the Kalman filter. Instead 
+                        of using my angular velocity, I tried using a time scale instead which kinda worked 
+                        better. Using this helped a little but not tooo much because I can't 
+                        guarantee that the robot was rotating at a constant speed for all 
+                        four main rotations because of my little adjustments. 
+                    </p>
+                </div>
+            </div>
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">LINE BASED MAP</h3>
+                    <p>
+                        After looking at my awful merged map, I manually drew lines on 
+                        the maps based off the scale of the room and what my TOF sensor 
+                        outputted. 
+                    </p>
+
+                </div>
+            </div>
+            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="flex-grow-1">
+                    <h3 class="mb-0">Conclusion + Acknowledgements</h3>
+                    <p>
+                        Comparing my map to the full room, I think I did ~meh~ 
+                        on  
+                     </p>
+                    <p>
+                        Right before this lab, I ended up frying my Artemis and 
+                        my robot died :(. I worked with Grace on this lab. 
+                     </p>
+                
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>

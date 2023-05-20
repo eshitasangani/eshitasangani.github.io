@@ -85,11 +85,13 @@
                     <p> 
                         PID control was not used in this lab because I didn't want the robot to slow down 
                         and then stop and then flip. We needed the momentum to be able to flip the robot quickly.
-                        Looking back, I should have implemented the Kalman Filter in conjunction with this so 
-                        it would be able to accurately predict the distance because the TOF sensors were a little wonky.
+                        At first, I tried adding the Kalman filter to be able to predict the distance accurately 
+                        but my distance sensor wasn't able to predict quickly enough while keeping the car at max PWM. 
+                        I chose not to add the Kalman filter then. 
                         It took a lot of testing to be able to figure out the perfect distance that would allow the 
-                        robot to flip. If I wasn't super pressed for time, I would have added the Kalman Filter 
-                        using what I calculated. 
+                        robot to flip. Also, since I was really pressed for time, I quickly tried the 
+                        flip at Philips but after seeing it not work, I went to try different surfaces. I didn't 
+                        end up getting a video of my philips run because of the disappointment lol. 
 
                     </p>
                 </div>
@@ -112,26 +114,16 @@
                         Using a fully charged battery made the robot go at the max speed 
                         but then also kinda veer around which was unfortunate as well. 
                      </p>
-
                      <p> 
                         After this being unsuccessful, we reverted back to open loop control 
-                        to see if the robot even had a capability to flip or not. It seemed like 
+                        to see if the robot even had a capability to flip or not. Using 
+                        a time based approach, (timing how long the forward + backwards 
+                        portions should take), allowed us to hard code each motion.  It seemed like 
                         since the distribution of weight was uneven, it would not flip. 
                         Even if we started the robot backwards and upside down, it would still not 
-                        flip which was super weird. 
+                        flip which was super weird. This is seen in the videos below. 
                      </p>
                      
-                </div>
-            </div>
-
-            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">Acknowledgements</h3>
-                    <p>
-                        BTW: I ended up frying my Artemis and 
-                        my robot died :(. I worked with Grace on this lab.
-                     </p>
-                
                 </div>
             </div>
 
