@@ -67,7 +67,9 @@
                         The green trajectory is the ground truth 
                         trajectory - ACTUAL. The blue trajectory is the trajectory according to the 
                         robot's belief - HAPPEN. The red trajectory is the trajectory based on solely 
-                        the odometry data - ODOM MODEL.
+                        the odometry data - ODOM MODEL. Some differences could be because of the slight 
+                        change of the rectuangular grid and the belief map. 
+
                     </p>
 
                 </div>
@@ -104,12 +106,6 @@
                 </div>
             </div>
 
-I opted to adapt the 
-            angular speed proportional control code from my mapping lab 9. It 
-            was adapted to maintain a spin of 20 degrees per second, with a 
-            default spin PWM of 100, and take a reading every second for 18 seconds 
-            to produce 18 data points uniformly across 360 degrees. The code is 
-            otherwise functionally identical to lab 9.
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0">MAKE OVERALL MAP</h3>
