@@ -57,7 +57,7 @@
                     
                     <p>
                         The spots on the map (below) that have an orange tap on them
-                        are the spots that we needed to hit. 
+                        are the spots that we needed to hit. I also worked with grace on this lab! 
                     </p>
                     <p> 
                         <img src="assets/fullmap.jpg" alt="..." width="25%" />
@@ -96,7 +96,6 @@
                     <p> 
                         <script src="https://gist.github.com/eshitasangani/12422db70345b87903d7eda6031b1221.js"></script>
                     </p>
-
                     <p> 
                         TURN_POS_90: This command turn the car CW a specific value by adapting
                         the code from Lab 9. The car keeps track of its angular position by 
@@ -130,30 +129,49 @@
                         After initalizing all these commands and testing them on the side, I 
                         then moved to the map to begin to attack the pathway. On the python side,
                         this required a lot of tuning due to environmental factors. 
-                        
                     </p>
-
-
 
                 </div>
             </div>
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">CHALLENGES </h3>
+                    <h3 class="mb-0">CHALLENGES + TESTING </h3>
                     <p> 
-                       A
+                       Tuning the Jupyter side was the hardest part. The Arduino 
+                       side only required some manipulation of the setup to 
+                       ensure there was no slowdown or noise from the sensors. 
+                       Since I had paramterized the KP value + distance, 
+                       each waypoint required precise tuning of the values to 
+                       make sure that I had the expected path. I started off 
+                       calculating the values for each waypoint individually, 
+                       but after I had those tuned perfectly, I struggled with the integration.
+                       Since I only used PID control, the ending position of one waypoint 
+                       was not necessarily the best starting point of the other waypoint. 
+                       That led to me having to retune the parameters for each one. 
+                       Then I decided to do the pathway in chunks - hoping that would 
+                       allow for some easier integration. That ended up being the best 
+                       strategy expect then both artemis + motor batteries starting glitching, I lost a TOF 
+                       sensor (rip), and the lab slowly became more dense. 
                     </p>
 
                 </div>
             </div>
-
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0">RESULTS</h3>
                     <p>
-                        These are the results 
+                        These are the results for the 3 sections that I worked on - 
+                        as seen they are pretty accurate on their own which was really 
+                        exciting for me. 
+                    </p>
+                    <p>
+                        As for a complete run, I was not able to get the perfect run I wanted 
+                        because of the density and length of my fellow lab mates trials and also 
+                        because of travel constraints. HOWEVER, all hope was not lost -> 
+                        I ended up getting 2 pretty solid runs that I was happy with consdering 
+                        the hardware issues I have been facing. These are seen below. 
                     </p>
 
                 </div>
