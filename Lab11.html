@@ -60,14 +60,15 @@
                         I started off with testing the localization simulation that was 
                         provided to us and this is what it resulted in. 
                     </p>
-                 
-                    <!-- add lOCALIZATION SIUMUALTIONS HERE -->
-
+                    
+                    <p> 
+                        <img src="assets/simrun.jpg" alt="..." width="55%" />
+                    </p>
                     <p> 
                         The green trajectory is the ground truth 
-                        trajectory - ACTUAL. The blue trajectory is the trajectory according to the 
-                        robot's belief - HAPPEN. The red trajectory is the trajectory based on solely 
-                        the odometry data - ODOM MODEL. Some differences could be because of the slight 
+                        path. The blue path is the trajectory according to the 
+                        robot's belief. The red path is the trajectory based on solely 
+                        the odometry data. Some differences could be because of the slight 
                         change of the rectuangular grid and the belief map. 
 
                     </p>
@@ -95,44 +96,36 @@
                         150 data points and usually in increments of 40 degrees. 
                         This data was not accurate enough for the observation loop 
                         function so I adapted the Arduino code to maintain 
-                        a spin of 20 degrees per second - but kept everything 
-                        else the same. This code snippet is pasted below. 
+                        a spin of 20 degrees per second on the PID side. This code snippet is pasted below. 
                      </p>
-
                      <p>
                         <script src="https://gist.github.com/eshitasangani/b5276ca0e6e20bab44566358d45e27e7.js"></script>
                      </p>
 
+                     <p>
+                        Because of the map from Lab 9 being very poor after having good polar plots, 
+                        I also adjusted the bluetooth command itself to collect data at specific values 
+                        instead of all the time and then having to do the post processing. After 
+                        making sure I have the angle I want, then only do I execute the PID 
+                        and send the command over via bluetooth. This code snippet is seen below. 
+                     </p>
+
+                     <p>
+                        <script src="https://gist.github.com/eshitasangani/fcce6fde987a36f7ff3a5ebc0c491ef3.js"></script>
+                     </p>
+
+                     <p>
+                        After all of this - I finally implemented this all within my perform_observation_loop function 
+                        with the associated notification handler as seen in this code snippet below. 
+                     </p>
+
+                     <p>
+                        <script src="https://gist.github.com/eshitasangani/1d6840bf80b7f973e6049cb3c874267a.js"></script>
+                     </p>
+
                 </div>
             </div>
 
-            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">MAKE OVERALL MAP</h3>
-                    <p>
-                        Now, I computed the transformation matrices and converted the 
-                        measurements from the TOF sesnor to a frame of reference of the room. 
-                        I scaled up the readings of the robot to reference the room. This is 
-                        the function that was used - inspired from ryan - . 
-                    </p>
-                    
-                    <p>
-                        Looking at these readings, my readings were kinda really bad 
-                        and not as clear as I would have wanted. I tried to do some more 
-                        post processing but it honestly just made it worse. Looking back, I 
-                        wish I spent more time getting the same angular readings - because 
-                        of the uncertainty of the floor and orientaion - I used different 
-                        degree turns which led to a lot of mismatches with my measurements. 
-                        Since the angles did not correspond to the same tof measurements for 
-                        each of the 4 measurements, the map was not as precise as I would have wanted. 
-                        I also would have definitely added the Kalman filter. Instead 
-                        of using my angular velocity, I tried using a time scale instead which kinda worked 
-                        better. Using this helped a little but not tooo much because I can't 
-                        guarantee that the robot was rotating at a constant speed for all 
-                        four main rotations because of my little adjustments. 
-                    </p>
-                </div>
-            </div>
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
                     <h3 class="mb-0">LINE BASED MAP</h3>
@@ -144,20 +137,7 @@
 
                 </div>
             </div>
-            <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div class="flex-grow-1">
-                    <h3 class="mb-0">Conclusion + Acknowledgements</h3>
-                    <p>
-                        Comparing my map to the full room, I think I did ~meh~ 
-                        on  
-                     </p>
-                    <p>
-                        Right before this lab, I ended up frying my Artemis and 
-                        my robot died :(. I worked with Grace on this lab. 
-                     </p>
-                
-                </div>
-            </div>
+
 
         </div>
     </section>
