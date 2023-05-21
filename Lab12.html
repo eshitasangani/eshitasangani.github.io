@@ -47,135 +47,100 @@
             <h2 class="mb-2">Lab 12<span class="text-primary">PATH PLANNING AND EXECUTION</span></h2>
             <p class="mb-5">
                 
-                The purpose of this lab is to use the TOF + IMU sensors on my robot 
-                to map out a room. This is done by taking various distance measurements 
-                from different locations around the room. At each location specified 
-                by the lab instructions, I used PID control on 
-                angular speed to spin in a slow circle 
-                and sample data accordingly. After calculating that, I used transformation 
-                matrices to combine all these measurements and eventually build an accurate 
-                map of the room. 
-                </p>
+                Woo! The purpose of this lab is to combine everything that we have learned from the 
+                previous 11!! labs to be able navigate our robot through a maze
+                while hitting the waypoints that were specified. The final lab! 
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0"> Designing Control</h3>
+                    <h3 class="mb-0"> Design Approach</h3>
                     
                     <p>
-                        I chose to implement my control system using a PID angular 
-                        speed control. This uses the raw gyroscope data that I recorded 
-                        while spinning the robot at a constant angular velocity around 
-                        the z axis. I definitely wanted to use closed loop control because 
-                        it results in more accurate data and because of the increased 
-                        control it provides me instead of having to deal with 
-                        the environment factors. In implementing this, I tried to spin my 
-                        robot every 20ish degrees and record data accordingly. 
+                        The spots on the map (below) that have an orange tap on them
+                        are the spots that we needed to hit. 
+                    </p>
+                    <p> 
+                        <img src="assets/fullmap.jpg" alt="..." width="25%" />
+                    </p>
+                    <p>
+                        This is the planned trajectory that I had. 
+                    </p>
+                    <p> 
+                        <img src="assets/plannedmap.jpg" alt="..." width="25%" />
+                    </p>
+                    <p> 
+                        I decided to implement PID control to help the robot navigate 
+                        through the maze. When planning out my code, I wanted 
+                        break up the sections into discrete chunks to be able to 
+                        incrementally test 
+                    </p>
+                    <p> 
+                        To achieve this, I designed 3 main arduino functions - 
+                        FORWARD, TURN_POS_90, and TURN_NEG_90. Diving into the 
+                        implementation -> 
                     </p>
 
                     <p> 
-                        I first wanted to recalculate the best PID gain. I started out 
-                        using the 0.05 as my Kp value because I wanted to have my robot rotate 
-                        at a constant speed. The performance was kinda all over the place at first 
-                        because of the battery power. I didn;t want to add an integral term because 
-                        of the windup that it would give and the fluctuation that would happen 
-                        as a result. I tried adding D but it wasn't consistent enough to justify 
-                        incorporating it. 
+                        FORWARD: This command will stop the car after reaching a set distance. 
+                        This function takes in the KP value + target distance - so it 
+                        can be adapted for multiple sections of the map and I would not 
+                        have to re upload the code. The steps go as follows: 
+                        1. Receive KP + Target distance
+                        2. Receive TOF sensor data 
+                        3. Calculate error and adjust movement scale in accordance 
+                        4. Move forwards/backwards according to PID 
+                        I only used a P controller to avoid integrator windup and also 
+                        less overshoot. The code for this command is seen below. 
+
+                    </p>
+                    <p> 
+                        <script src="https://gist.github.com/eshitasangani/12422db70345b87903d7eda6031b1221.js"></script>
                     </p>
 
                     <p> 
-                        I first wanted to recalculate the best PID gain. I started out 
-                        using the 0.05 as my Kp value because I wanted to have my robot rotate 
-                        at a constant speed. The performance was kinda all over the place at first 
-                        because of the battery power. I didn't want to add an integral term because 
-                        of the windup that it would give and the fluctuation that would happen 
-                        as a result. I tried adding D but it wasn't consistent enough to justify 
-                        incorporating it. From plotting the angular velocity, it's a little noisy, but 
-                        you can see that it rotates around 20 degrees on average. Because it was pretty noisy, 
-                        I added a lowpass filter later on to improve the accuracy of my readings. 
-                        I used open loop control to figure out the min speed that I was able to 
-                        spin the robot at, which was around 90. For every spin, I obtained around 
-                        150 data points, around 15 data points every second. 
+                        TURN_POS_90: This command turn the car CW a specific value by adapting
+                        the code from Lab 9. The car keeps track of its angular position by 
+                        with the angular velocity found from the gyroscope. 
+                        This function also takes in the KP value + target distance.  
+                        1. Receive KP + Target angle
+                        2. Receive IMU gyroscope data
+                        3. Calculate error and adjust movement scale in accordance 
+                        4. Move according to PID 
+                        The code for this command is seen below. 
                     </p>
                     <p> 
-                        This is my code that I used for the PID control and the case. I sent 
-                        all the data after it was done to make sure that the sending did 
-                        not change the execution time of my program. Finding the values was 
-                        difficult because every run was different because of the floor, the battery level, 
-                        and the exact position I placed the robot at. Also, if I were to spin 
-                        in the middle of a 4x4 room, I think that I could expect pretty good accuracy 
-                        because the robot's speed is pretty consistent. 
-                    </p>
-
-                    <video width="500" controls>
-                        <source src="assets/rotate.mp4" type=video/mp4>
-                    </video>
-
-                    <video width="500" controls>
-                        <source src="assets/slower.mp4" type=video/mp4>
-                    </video>
-
-                    <p> 
-                        <img src="assets/angv.jpg" alt="..." width="25%" />
+                        <script src="https://gist.github.com/eshitasangani/c70ce1d97e23895ff3ca76277d640ad1.js"></script>
                     </p>
 
                     <p> 
-                        <script src="https://gist.github.com/eshitasangani/3f92f6b77bc5f319a18063125060ce3e.js"></script>
+                        TURN_NEG_90: This command turn the car CCW a specific value by adapting
+                        the code from Lab 9. The car keeps track of its angular position by 
+                        with the angular velocity found from the gyroscope. 
+                        This function also takes in the KP value + target distance.  
+                        1. Receive KP + Target angle
+                        2. Receive IMU gyroscope data
+                        3. Calculate error and adjust movement scale in accordance 
+                        4. Move according to PID 
+                        The code for this command is seen below. 
                     </p>
-
                     <p> 
-                        <script src="https://gist.github.com/eshitasangani/cca1596b403d89dc08f2743ce754a563.js"></script>
+                        <script src="https://gist.github.com/eshitasangani/1b3fea9fe4159a346a56c43b667ea1a9.js"></script>
                     </p>
 
+                    
                 </div>
             </div>
 
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">@ VARIOUS DISTANCES </h3>
+                    <h3 class="mb-0">CHALLENGES </h3>
                     <p> 
                        After creating this amazing perfect super accurate controller :), I 
                        then placed it across the 4 different distances across the lab. 
                        The associated polar plots and TOF vs Time plots are shown for 
                        each point. 
                     </p>
-                    <p> 
-                        Plot for (5,3)
-                     </p>
 
-                     <p> 
-                        <img src="assets/minusss.jpg" alt="..." width="25%" />
-                    </p>
-                    <p> 
-                        <img src="assets/first.jpg" alt="..." width="25%" />
-                    </p>
-
-                     <p> 
-                        Plot for (0,3)
-                     </p>
-                     <p> 
-                        <img src="assets/zero.jpg" alt="..." width="25%" />
-                    </p>
-                    <p> 
-                        <img src="assets/zeroooo.jpg" alt="..." width="25%" />
-                    </p>
-                     <p> 
-                        Plot for (-3,-2)
-                     </p>
-                     <p> 
-                        <img src="assets/minus332.jpg" alt="..." width="25%" />
-                    </p>
-                    <p> 
-                        <img src="assets/12.jpg" alt="..." width="25%" />
-                    </p>
-                     <p> 
-                        Plot for (5,-3)
-                     </p>
-                     <p> 
-                        <img src="assets/minus53.jpg" alt="..." width="25%" />
-                    </p>
-                    <p> 
-                        <img src="assets/fivenegative3.jpg" alt="..." width="25%" />
-                    </p>
                 </div>
             </div>
 
@@ -193,31 +158,14 @@
                     </p>
                    
                     <p>
-                        Looking at these readings, my readings were kinda really bad 
-                        and not as clear as I would have wanted. I tried to do some more 
-                        post processing but it honestly just made it worse. Looking back, I 
-                        wish I spent more time getting the same angular readings - because 
-                        of the uncertainty of the floor and orientaion and battery - I used different 
-                        degree turns which led to a lot of mismatches with my measurements. 
-                        Since the angles did not correspond to the same tof measurements for 
-                        each of the 4 measurements, the map was not as precise as I would have wanted. 
-                        I also tried using a time scale instead which kinda worked 
-                        better - to get it 
-                        to turn for a specific amount. 
-                        Using this helped a little but not tooo much because I can't 
-                        guarantee that the robot was rotating at a constant speed for all 
-                        four main rotations because of my little adjustments. But 
-                        after doing the averages for the relative distances based
-                        on the map + angular speeds, I am able to conclude that the robot was
-                        turning at a semi constant rate but I still would trust the orientation 
-                        from the integrated gyroscope values more. 
-                        
+                        Lo
+
                     </p>
                 </div>
             </div>
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">LINE BASED MAP</h3>
+                    <h3 class="mb-0">RESULTS</h3>
                     <p>
                         After looking at my awful merged map, I added the lines on 
                         the maps based off the scale of the room and what my TOF sensor 
@@ -226,12 +174,18 @@
 
                 </div>
             </div>
+
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">Conclusion + Acknowledgements</h3>
+                    <h3 class="mb-0">REFLECTION & ACKNOWLEDGEMENTS</h3>
                     <p>
-                        Comparing my map to the full room, I think I did ~meh~ 
-                        on 
+                        Thank you so much to all the wonderful TA's for having so many lab 
+                        hours and for all their help + Professor Petersen for the course + lectures.
+                        This was a really challenging course but I learned a lot about robotics 
+                        and met some really cool people, so for that I will be forever grateful.
+                        Special thank you to Anya + Johnathan, my lab TAs, for explaining 
+                        various concepts to me and being supportive and encouraging 
+                        when my robot would fail. See ya next time!!! :) 
                      </p>
                 
                 </div>
